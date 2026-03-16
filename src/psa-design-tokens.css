@@ -1,0 +1,15 @@
+/* ==========================================================================
+   PSA 設計 Tokens - 功能頁與首頁風格統一
+   灰階、低飽和、圓角一致、柔和陰影
+   ========================================================================== */
+
+/* 僅在功能頁 (data-psa-func) 時覆蓋全域變數 */
+.app-container[data-psa-func="true"] {
+  --psa-radius: 14px;
+  --psa-radius-sm: 10px;
+  --psa-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --psa-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --psa-border: rgba(0, 0, 0, 0.08);
+  --psa-border-strong: rgba(0, 0, 0, 0.12);
+  --psa-section-gap: 1.5rem;
+}

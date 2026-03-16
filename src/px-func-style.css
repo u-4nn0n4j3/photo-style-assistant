@@ -1,0 +1,878 @@
+/* ==========================================================================
+   功能頁面：灰色系、低飽和、與首頁同一套質感
+   僅在 .app-container[data-psa-func="true"] 時生效
+   禁止綠色主視覺；圓角 + 柔和陰影 + 細框線
+   ========================================================================== */
+
+/* 色彩：冷灰/霧灰/石板灰；點綴色極淡灰綠灰藍 */
+.app-container[data-psa-func="true"] {
+  --fg-bg: #f1f0ed;
+  --fg-bg-soft: #e8e6e3;
+  --fg-card: rgba(255, 255, 255, 0.82);
+  --fg-border: rgba(0, 0, 0, 0.08);
+  --fg-border-strong: rgba(0, 0, 0, 0.12);
+  --fg-ink: #3a3a3a;
+  --fg-mid: #5a5a56;
+  --fg-mute: #888884;
+  --fg-accent: #8a9492;
+  --fg-accent-lt: rgba(138, 148, 146, 0.15);
+  --fg-warn: #a88a7a;
+  --fg-warn-lt: #f0e8e4;
+  --fg-ok: #8a9a96;
+  --fg-ok-lt: rgba(138, 154, 150, 0.15);
+  --fg-warm: #c4b8a8;
+  --fg-cool: #a8b4bc;
+  --psa-radius: 14px;
+  --psa-radius-sm: 10px;
+  --psa-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --psa-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --psa-section-gap: 1.5rem;
+}
+
+/* style: 背景 - 柔霧感 + 很淡噪點 */
+body:has(.app-container[data-psa-func="true"]) {
+  background: var(--fg-bg) !important;
+}
+
+body:has(.app-container[data-psa-func="true"])::before {
+  content: "" !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      transparent 2px,
+      rgba(0, 0, 0, 0.015) 2px,
+      rgba(0, 0, 0, 0.015) 3px
+    ),
+    linear-gradient(180deg, #f5f4f1 0%, #ebe9e6 40%, #e6e4e0 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-container[data-psa-func="true"] {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  background: transparent;
+  color: var(--fg-ink);
+  position: relative;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   style: header
+   -------------------------------------------------------------------------- */
+.app-container[data-psa-func="true"] .site-header {
+  background: rgba(232, 230, 227, 0.6);
+  border-bottom: 1px solid var(--fg-border);
+  padding: 2.5rem 2rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.app-container[data-psa-func="true"] .site-title,
+.app-container[data-psa-func="true"] .site-subtitle {
+  color: var(--fg-ink);
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+.app-container[data-psa-func="true"] .logo-px-icon {
+  flex-shrink: 0;
+}
+
+/* 隱藏舊的 pixel-camera-logo（若存在） */
+.app-container[data-psa-func="true"] .pixel-camera-logo {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   style: primary switches - 兩個主按鍵
+   -------------------------------------------------------------------------- */
+.app-container[data-psa-func="true"] .nav-tabs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background: transparent;
+  border-bottom: 1px solid var(--fg-border);
+}
+
+.app-container[data-psa-func="true"] .nav-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--fg-card);
+  border: 1px solid var(--fg-border);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--fg-mid);
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  position: relative;
+  overflow: visible;
+}
+
+.app-container[data-psa-func="true"] .nav-tab:hover {
+  background: var(--fg-bg-soft);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.app-container[data-psa-func="true"] .nav-tab.active {
+  background: var(--fg-bg-soft);
+  color: var(--fg-ink);
+  font-weight: 600;
+  border-color: var(--fg-border-strong);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.app-container[data-psa-func="true"] .nav-tab.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: var(--fg-accent);
+  border-radius: 0 2px 2px 0;
+}
+
+/* --------------------------------------------------------------------------
+   style: tabs - 景深/曝光/ND/日落
+   -------------------------------------------------------------------------- */
+.app-container[data-psa-func="true"] .tool-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px dashed var(--fg-border);
+}
+
+.app-container[data-psa-func="true"] .tool-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--fg-card);
+  border: 1px solid var(--fg-border);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--fg-mid);
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+
+.app-container[data-psa-func="true"] .tool-tab:hover {
+  background: var(--fg-bg-soft);
+}
+
+.app-container[data-psa-func="true"] .tool-tab.active {
+  background: var(--fg-bg-soft);
+  color: var(--fg-ink);
+  font-weight: 600;
+  border-color: var(--fg-border-strong);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.app-container[data-psa-func="true"] .tool-tab.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 50%;
+  background: var(--fg-accent);
+  border-radius: 0 2px 2px 0;
+}
+
+.app-container[data-psa-func="true"] .tool-tab[data-tool]::before {
+  display: none;
+}
+
+.app-container[data-psa-func="true"] .tool-tab.active[data-tool]::before {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   style: 計算面板 / 卡片 - 圓角 + 柔和陰影 + 細框
+   -------------------------------------------------------------------------- */
+.app-container[data-psa-func="true"] .psa-calc-panel {
+  border: 1px solid var(--fg-border);
+  border-radius: var(--psa-radius);
+  background: var(--fg-card);
+  box-shadow: var(--psa-shadow-sm);
+  overflow: hidden;
+}
+
+.app-container[data-psa-func="true"] .psa-calc-content {
+  padding: 1.5rem 2rem;
+  border-top: 1px dashed var(--fg-border);
+  display: block;
+  max-width: 100%;
+}
+
+/* 景深計算器：移除中央垂直線，強制單欄 */
+.app-container[data-psa-func="true"] .psa-calc-panel {
+  display: block;
+}
+
+/* 景深結果 2x2 網格改單欄，避免中央欄隙視覺像垂直線 */
+.app-container[data-psa-func="true"] .psa-calc-content .analysis-result-enter .grid {
+  grid-template-columns: 1fr !important;
+}
+
+.app-container[data-psa-func="true"] .psa-calc-content::before,
+.app-container[data-psa-func="true"] .psa-calc-content::after,
+.app-container[data-psa-func="true"] .psa-calc-panel::before,
+.app-container[data-psa-func="true"] .psa-calc-panel::after {
+  content: none !important;
+  display: none !important;
+}
+
+.app-container[data-psa-func="true"] .psa-calc-content .rounded-2xl::before,
+.app-container[data-psa-func="true"] .psa-calc-content .rounded-2xl::after {
+  content: none !important;
+  display: none !important;
+}
+
+.app-container[data-psa-func="true"] .psa-calc-content > * + * {
+  margin-top: var(--psa-section-gap);
+}
+
+.app-container[data-psa-func="true"] .psa-calc-content .rounded-2xl,
+.app-container[data-psa-func="true"] .psa-calc-content .rounded-xl {
+  border: 1px solid var(--fg-border) !important;
+  border-radius: var(--psa-radius-sm) !important;
+  box-shadow: var(--psa-shadow-sm) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.app-container[data-psa-func="true"] .calculator-card,
+.app-container[data-psa-func="true"] .card,
+.app-container[data-psa-func="true"] .result-section,
+.app-container[data-psa-func="true"] .exposure-risk-detection,
+.app-container[data-psa-func="true"] .scenario-recommender,
+.app-container[data-psa-func="true"] .recommendation-card,
+.app-container[data-psa-func="true"] section[aria-label*="拍攝後"] {
+  border-radius: var(--psa-radius-sm) !important;
+  border: 1px solid var(--fg-border) !important;
+  background: var(--fg-card) !important;
+  box-shadow: var(--psa-shadow-sm) !important;
+}
+
+.app-container[data-psa-func="true"] .calculator-title,
+.app-container[data-psa-func="true"] .scenario-title {
+  color: var(--fg-ink);
+}
+
+.app-container[data-psa-func="true"] .calculator-title::before,
+.app-container[data-psa-func="true"] .scenario-title::before {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   style: form controls
+   -------------------------------------------------------------------------- */
+.app-container[data-psa-func="true"] label,
+.app-container[data-psa-func="true"] .input-label,
+.app-container[data-psa-func="true"] .scenario-label,
+.app-container[data-psa-func="true"] .preference-label {
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  color: var(--fg-mid) !important;
+}
+
+.app-container[data-psa-func="true"] select,
+.app-container[data-psa-func="true"] input[type="text"],
+.app-container[data-psa-func="true"] input[type="number"],
+.app-container[data-psa-func="true"] input[type="date"] {
+  border: 1px solid var(--fg-border) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 8px !important;
+  font-size: 0.9375rem !important;
+  color: var(--fg-ink) !important;
+}
+
+.app-container[data-psa-func="true"] select:focus,
+.app-container[data-psa-func="true"] input:focus {
+  border-color: var(--fg-accent) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px var(--fg-accent-lt) !important;
+}
+
+/* 主要操作按鈕 */
+.app-container[data-psa-func="true"] .btn-primary,
+.app-container[data-psa-func="true"] .btn-calculate,
+.app-container[data-psa-func="true"] .btn-recommend,
+.app-container[data-psa-func="true"] button[type="submit"],
+.app-container[data-psa-func="true"] .calculate-button,
+.app-container[data-psa-func="true"] .recommend-button,
+.app-container[data-psa-func="true"] .query-button {
+  background: var(--fg-bg-soft) !important;
+  color: var(--fg-ink) !important;
+  border: 1px solid var(--fg-border-strong) !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+
+.app-container[data-psa-func="true"] .btn-primary:hover,
+.app-container[data-psa-func="true"] .btn-calculate:hover,
+.app-container[data-psa-func="true"] .btn-recommend:hover,
+.app-container[data-psa-func="true"] button.inline-flex:hover:not(:disabled) {
+  background: var(--fg-mid) !important;
+  color: #fff !important;
+  border-color: var(--fg-mid) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   style: result cards - 降飽和灰階提示
+   -------------------------------------------------------------------------- */
+.app-container[data-psa-func="true"] .result-section::before {
+  background: var(--fg-mid) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+
+.app-container[data-psa-func="true"] .result-item,
+.app-container[data-psa-func="true"] .setting-item,
+.app-container[data-psa-func="true"] .rounded-xl.bg-white {
+  border: 1px solid var(--fg-border) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 10px !important;
+}
+
+.app-container[data-psa-func="true"] .result-label,
+.app-container[data-psa-func="true"] .setting-label {
+  color: var(--fg-mute) !important;
+}
+
+.app-container[data-psa-func="true"] .result-value,
+.app-container[data-psa-func="true"] .setting-value {
+  color: var(--fg-ink) !important;
+}
+
+/* 警告：灰紅/陶灰 */
+.app-container[data-psa-func="true"] .risk-alert.risk-warning,
+.app-container[data-psa-func="true"] .risk-alert.risk-info.noise-risk,
+.app-container[data-psa-func="true"] .rounded-xl.border-2.border-amber-200 {
+  border-left: 4px solid var(--fg-warn) !important;
+  background: var(--fg-warn-lt) !important;
+  border-radius: 8px !important;
+}
+
+/* 成功/提示：灰藍/灰綠 */
+.app-container[data-psa-func="true"] .risk-alert.risk-success,
+.app-container[data-psa-func="true"] .risk-info:not(.noise-risk),
+.app-container[data-psa-func="true"] .rounded-xl.border-2.border-emerald-200,
+.app-container[data-psa-func="true"] .border-2.border-\[var\(--color-accent-primary\)\] {
+  border-left: 4px solid var(--fg-ok) !important;
+  background: var(--fg-ok-lt) !important;
+  border-radius: 8px !important;
+}
+
+/* C. 日落時刻結果卡 - 重點時間醒目、灰階層次 */
+.app-container[data-psa-func="true"] .sunset-result-card {
+  border: 1px solid var(--fg-border) !important;
+  border-radius: var(--psa-radius-sm, 10px) !important;
+  box-shadow: var(--psa-shadow-sm) !important;
+}
+
+.app-container[data-psa-func="true"] .golden-hour-card {
+  background: #e8e4dc !important;
+  border-left: 4px solid #a89888 !important;
+  color: var(--fg-ink) !important;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+.app-container[data-psa-func="true"] .blue-hour-card {
+  background: #e0e4e8 !important;
+  border-left: 4px solid #8898a4 !important;
+  color: var(--fg-ink) !important;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+/* D) 日落 - Golden/Blue Hour 標題：深藍灰 #394A58 */
+.app-container[data-psa-func="true"] .sunset-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #394A58;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+.app-container[data-psa-func="true"] .sunset-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 12px;
+  line-height: 1.6;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.app-container[data-psa-func="true"] .sunset-row:hover {
+  background: rgba(119, 150, 154, 0.05);
+}
+
+.app-container[data-psa-func="true"] .sunset-row:last-child {
+  margin-bottom: 0;
+}
+
+.app-container[data-psa-func="true"] .sunset-label {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--fg-mid);
+  font-weight: 400;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+/* 時間數值：16-18px */
+.app-container[data-psa-func="true"] .sunset-time-value {
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  color: #577C8A;
+}
+
+/* 日出/日落時刻：深灰綠 #475950，font-weight 700 */
+.app-container[data-psa-func="true"] .sunset-time-sunrise,
+.app-container[data-psa-func="true"] .sunset-time-sunset {
+  color: #475950 !important;
+  font-weight: 700 !important;
+}
+
+.app-container[data-psa-func="true"] .sunset-row-sunrise .sunset-time-sunrise,
+.app-container[data-psa-func="true"] .sunset-row-sunset .sunset-time-sunset {
+  background: rgba(119, 150, 154, 0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Golden Hour 框框：更突出 */
+.app-container[data-psa-func="true"] .sunset-time-golden {
+  color: #6C9A8E !important;
+  font-weight: 600 !important;
+}
+
+.app-container[data-psa-func="true"] .sunset-row-golden {
+  background: rgba(119, 150, 154, 0.15) !important;
+  border: 2px solid #77969A !important;
+  border-left: 4px solid #6C9A8E !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-weight: 600;
+}
+
+/* 藍調時段框框：更突出 */
+.app-container[data-psa-func="true"] .sunset-row-blue-hour {
+  background: rgba(87, 124, 138, 0.12) !important;
+  border: 2px solid #577C8A !important;
+  border-left: 4px solid #394A58 !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-weight: 600;
+}
+
+.app-container[data-psa-func="true"] .sunset-divider {
+  height: 1px;
+  background: var(--fg-border);
+  margin: 0.75rem 0;
+}
+
+/* 目前狀態：深藍灰 #394A58，白鼠淡灰背景 */
+.app-container[data-psa-func="true"] .sunset-status-banner.sunset-info-banner {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(189, 192, 186, 0.3) !important;
+  border: 1px solid var(--fg-border) !important;
+  color: #394A58 !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+.app-container[data-psa-func="true"] .sunset-info-banner .sunset-info-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.app-container[data-psa-func="true"] .sunset-status-banner .status-label {
+  font-weight: 600;
+  color: #394A58;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+.app-container[data-psa-func="true"] .sunset-status-banner .status-countdown {
+  color: #394A58;
+  opacity: 0.9;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+/* 提示文字：深川鼠 #77969A */
+.app-container[data-psa-func="true"] .sunset-hint {
+  color: #77969A;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+}
+
+/* 永晝/永夜提示：灰階 */
+.app-container[data-psa-func="true"] .rounded-xl.p-5.bg-amber-100 {
+  background: var(--fg-warn-lt) !important;
+  color: var(--fg-ink) !important;
+  border: 1px solid var(--fg-border) !important;
+}
+
+/* Lightroom 卡片：深灰 */
+.app-container[data-psa-func="true"] .lightroom-suggestions-card,
+.app-container[data-psa-func="true"] .lightroom-suggestions {
+  background: #3a3a36 !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.app-container[data-psa-func="true"] .lightroom-adjustment-item {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-radius: 8px !important;
+}
+
+.app-container[data-psa-func="true"] .card-badge {
+  background: var(--fg-mid) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+
+.app-container[data-psa-func="true"] .analysis-comparison-card {
+  background: var(--fg-card) !important;
+  border: 1px solid var(--fg-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 相機類型 / 情境按鈕 */
+.app-container[data-psa-func="true"] .scenario-btn,
+.app-container[data-psa-func="true"] .camera-type-option,
+.app-container[data-psa-func="true"] label[role="radiogroup"] > label {
+  border-radius: 10px !important;
+  border: 1px solid var(--fg-border) !important;
+  background: var(--fg-card) !important;
+}
+
+.app-container[data-psa-func="true"] .scenario-btn.active,
+.app-container[data-psa-func="true"] .camera-type-option.selected,
+.app-container[data-psa-func="true"] label:has(input:checked) {
+  background: var(--fg-mid) !important;
+  color: #fff !important;
+  border-color: var(--fg-mid) !important;
+}
+
+/* Tolerance 按鈕 */
+.app-container[data-psa-func="true"] .tolerance-btn {
+  border-radius: 10px !important;
+  border: 1px solid var(--fg-border) !important;
+  background: var(--fg-card) !important;
+}
+
+.app-container[data-psa-func="true"] .tolerance-btn.active {
+  background: var(--fg-mid) !important;
+  color: #fff !important;
+  border-color: var(--fg-mid) !important;
+}
+
+/* 景深進度條 */
+.app-container[data-psa-func="true"] .dof-bar,
+.app-container[data-psa-func="true"] .relative.h-12 {
+  border: 1px solid var(--fg-border) !important;
+  border-radius: 6px !important;
+}
+
+.app-container[data-psa-func="true"] .dof-bar-clear,
+.app-container[data-psa-func="true"] .bg-\[var\(--color-accent-primary\)\] {
+  background: var(--fg-accent) !important;
+}
+
+.app-container[data-psa-func="true"] .focus-marker {
+  width: 2px !important;
+  min-width: 2px !important;
+  background: var(--fg-ink) !important;
+}
+
+/* 分析模式選擇器 - 模式卡片（C）灰階 */
+.app-container[data-psa-func="true"] .analysis-mode-selector.mode-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .app-container[data-psa-func="true"] .analysis-mode-selector.mode-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.app-container[data-psa-func="true"] .mode-btn.mode-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px !important;
+  min-height: unset !important;
+  border-radius: var(--psa-radius, 12px) !important;
+  border: 1px solid var(--fg-border) !important;
+  background: var(--fg-card) !important;
+  text-align: left;
+  position: relative;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.app-container[data-psa-func="true"] .mode-btn.mode-card:hover {
+  background: var(--fg-bg-soft) !important;
+  border-color: var(--fg-border-strong) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.app-container[data-psa-func="true"] .mode-btn.mode-card.active {
+  background: var(--fg-bg-soft) !important;
+  color: var(--fg-ink) !important;
+  border: 1px solid var(--fg-border-strong) !important;
+  border-width: 2px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.app-container[data-psa-func="true"] .mode-btn.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 50%;
+  background: var(--fg-accent);
+  border-radius: 0 2px 2px 0;
+}
+
+.app-container[data-psa-func="true"] .mode-btn .mode-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container[data-psa-func="true"] .mode-btn .mode-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.app-container[data-psa-func="true"] .mode-btn .mode-text {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.app-container[data-psa-func="true"] .mode-btn .mode-desc {
+  font-size: 0.8125rem;
+  color: var(--fg-mute);
+  margin: 0;
+}
+
+/* Upload 區 */
+.app-container[data-psa-func="true"] .upload-area,
+.app-container[data-psa-func="true"] .upload-placeholder {
+  border: 1px dashed var(--fg-border-strong) !important;
+  border-radius: 12px !important;
+}
+
+.app-container[data-psa-func="true"] .upload-area:hover {
+  border-color: var(--fg-accent) !important;
+  background: var(--fg-accent-lt) !important;
+}
+
+/* 對比分析 bar */
+.app-container[data-psa-func="true"] .comparison-bar-track {
+  border-radius: 4px !important;
+}
+
+.app-container[data-psa-func="true"] .comparison-bar-your-photo {
+  background: var(--fg-mid) !important;
+}
+
+.app-container[data-psa-func="true"] .comparison-bar-reference {
+  background: var(--fg-accent) !important;
+}
+
+/* adjustment-hint 燈泡改灰階 */
+.app-container[data-psa-func="true"] .adjustment-hint::before {
+  content: "" !important;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(var(--fg-accent) 0 0) 8px 4px/4px 4px,
+    linear-gradient(var(--fg-accent) 0 0) 6px 8px/8px 2px,
+    linear-gradient(var(--fg-accent) 0 0) 6px 12px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   RWD 加強：手機 / 平板專用
+   - 不影響桌機 (1280px 以上) 現有版面
+   ========================================================================== */
+
+/* 通用：確保可點擊元素觸控區域 >= 44px */
+.app-container[data-psa-func="true"] .tool-tab,
+.app-container[data-psa-func="true"] .nav-tab,
+.app-container[data-psa-func="true"] .btn-primary,
+.app-container[data-psa-func="true"] .btn-calculate,
+.app-container[data-psa-func="true"] .btn-recommend,
+.app-container[data-psa-func="true"] .scenario-btn,
+.app-container[data-psa-func="true"] .tolerance-btn {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* 1) 頂部工具頁籤：手機滑動、平板字級微調 */
+@media (max-width: 768px) {
+  .app-container[data-psa-func="true"] .tool-tabs {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .app-container[data-psa-func="true"] .tool-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    font-size: 0.875rem; /* >= 14px */
+  }
+}
+
+/* 行動：375–430，工具頁籤更像分頁列 */
+@media (max-width: 430px) {
+  .app-container[data-psa-func="true"] .tool-tabs {
+    gap: 0.5rem;
+  }
+
+  .app-container[data-psa-func="true"] .tool-tab {
+    min-width: 120px;
+    padding-inline: 0.75rem;
+  }
+}
+
+/* 2) 參數輸入區（曝光三角：光圈/快門/ISO/焦距） */
+/* 手機：2×2，且內部 select + 自訂欄位在窄螢幕改為直向疊排避免溢出 */
+@media (max-width: 640px) {
+  .app-container[data-psa-func="true"] .exposure-params-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 0.75rem;
+    row-gap: 0.75rem;
+  }
+
+  .app-container[data-psa-func="true"] .exposure-params-grid .flex {
+    flex-direction: column;
+  }
+
+  .app-container[data-psa-func="true"] .exposure-params-grid .flex > * {
+    width: 100% !important;
+  }
+}
+
+/* 3) 相機類型選擇：手機＋平板等寬三欄填滿一行 */
+@media (max-width: 1194px) {
+  .app-container[data-psa-func="true"] [role="radiogroup"][aria-label^="相機類型"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .app-container[data-psa-func="true"] [role="radiogroup"][aria-label^="相機類型"] > label {
+    min-width: 0;
+  }
+}
+
+/* 4) 拍攝情境按鈕：手機 3×2、平板可 3×2 或單行 */
+@media (max-width: 1024px) {
+  .app-container[data-psa-func="true"] .scenario-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .app-container[data-psa-func="true"] .scenario-btn {
+    flex: 0 0 auto;
+    min-width: 0;
+    text-align: center;
+    font-size: 0.875rem; /* >= 14px */
+    padding-inline: 0.5rem;
+  }
+}
+
+/* 5) 拍攝偏好 checkbox：手機 2×2 排列 */
+@media (max-width: 768px) {
+  .app-container[data-psa-func="true"] .preference-checkboxes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 430px) {
+  .app-container[data-psa-func="true"] .preference-checkboxes {
+    column-gap: 0.5rem;
+    row-gap: 0.5rem;
+  }
+}
+
+/* 6) 結果區塊與風險提示：小螢幕全寬、文字不截斷 */
+@media (max-width: 768px) {
+  .app-container[data-psa-func="true"] .result-section,
+  .app-container[data-psa-func="true"] .exposure-risk-detection,
+  .app-container[data-psa-func="true"] .recommendation-card,
+  .app-container[data-psa-func="true"] .analysis-result-enter > .grid,
+  .app-container[data-psa-func="true"] .sunset-result-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .app-container[data-psa-func="true"] .result-section,
+  .app-container[data-psa-func="true"] .exposure-risk-detection,
+  .app-container[data-psa-func="true"] .recommendation-card,
+  .app-container[data-psa-func="true"] .sunset-result-card {
+    padding-inline: 1rem;
+  }
+
+  .app-container[data-psa-func="true"] .result-section *,
+  .app-container[data-psa-func="true"] .exposure-risk-detection *,
+  .app-container[data-psa-func="true"] .recommendation-card *,
+  .app-container[data-psa-func="true"] .sunset-result-card * {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    font-size: 0.875rem;
+  }
+}

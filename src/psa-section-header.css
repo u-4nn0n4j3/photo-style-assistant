@@ -1,0 +1,63 @@
+/* ==========================================================================
+   A. 共用標題列排版規範（全站一致）
+   ========================================================================== */
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 1rem;
+}
+
+.sectionHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sectionIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sectionTitleStack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.sectionSubtitle {
+  font-size: 0.875rem;
+  color: var(--fg-mute, #888884);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 功能頁覆蓋 */
+.app-container[data-psa-func="true"] .sectionSubtitle {
+  color: var(--fg-mute);
+}
+
+.app-container[data-psa-func="true"] .sectionHeader {
+  margin-bottom: 1rem;
+}
+
+.app-container[data-psa-func="true"] .sectionHeaderLeft {
+  gap: 10px;
+}
+
+.app-container[data-psa-func="true"] .sectionTitle {
+  color: var(--fg-ink);
+}

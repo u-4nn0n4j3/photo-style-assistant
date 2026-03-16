@@ -1,0 +1,582 @@
+/* ==========================================================================
+   攝影風格助手首頁 - Hero 左右兩欄
+   左欄 45%：標題、副標、相機插圖 | 右欄 55%：兩個功能卡片
+   背景：米白 #F5F2EB，左下圓弧 #E8E4DC，右上光暈
+   ========================================================================== */
+
+.homepage-psa__debug-badge {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: #c00;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.homepage-psa[data-psa-home="true"] {
+  min-height: 100dvh;
+  background: #F5F2EB;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 左下角大型淺色圓弧裝飾 */
+.homepage-psa[data-psa-home="true"]::before {
+  content: "";
+  position: absolute;
+  bottom: -15%;
+  left: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(ellipse at bottom left, rgba(232, 228, 220, 0.6) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* 右上角極淡圓形光暈 */
+.homepage-psa[data-psa-home="true"]::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(232, 228, 220, 0.25) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* 外層大框框：把整個 Hero 包起來 */
+.homepage-psa__shell {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+/* Hero 兩欄 Grid：左 45% / 右 55%，hero 需要 relative 讓背景 absolute 鋪滿 */
+.homepage-psa__hero {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 48px;
+  align-items: center;
+  padding: 96px 24px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 75vh;
+  z-index: 1;
+}
+
+/* 左欄：標題、副標、相機插圖 */
+.homepage-psa__left {
+  min-width: 0;
+}
+
+.homepage-psa[data-psa-home="true"] .homepage-psa__title {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-size: clamp(2.75rem, 4vw, 3.25rem);
+  font-weight: 500;
+  color: #2F3E3A;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  margin: 0 0 0.5rem 0;
+}
+
+.homepage-psa__subtitle {
+  font-size: clamp(1rem, 1.1vw, 1.125rem);
+  color: #2F3E3A;
+  opacity: 0.78;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.homepage-psa__camera-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* 右欄：兩個功能卡片，垂直置中，間距 16px */
+.homepage-psa__right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* 卡片共通：細邊框、padding、陰影 */
+.homepage-psa__card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  text-align: left;
+  border: 1px solid rgba(60, 80, 70, 0.18);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.homepage-psa__card:hover,
+.homepage-psa__card:active {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* 第一個卡片：白底、整張可點擊（與第二張同一套互動） */
+.homepage-psa__card--primary {
+  background: #fff;
+}
+
+.homepage-psa__card--primary .homepage-psa__card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* CTA 按鈕：直角風格、低飽和暖灰金 */
+.homepage-psa__btn-primary,
+.psa-ctaBtn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background: #b88d42;
+  color: rgba(255, 255, 255, 0.96);
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(140, 110, 60, 0.25);
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.homepage-psa__btn-primary:hover,
+.psa-ctaBtn:hover {
+  background: #a9823d;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+.homepage-psa__btn-primary:active,
+.psa-ctaBtn:active {
+  background: #9a7638;
+}
+
+/* 第二個卡片：淺灰白 */
+.homepage-psa__card--secondary {
+  background: #F5F2EB;
+}
+
+.homepage-psa__card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.homepage-psa__card-title {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: #2F3E3A;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: 0.02em;
+}
+
+/* 覆蓋 index.css 的 h3::before，完全移除標題前綠色符號 */
+h3.homepage-psa__card-title::before {
+  content: none !important;
+  display: none !important;
+}
+
+.homepage-psa__card-desc {
+  font-size: 14px;
+  color: #8A8680;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.homepage-psa__card-arrow {
+  flex-shrink: 0;
+  color: #2F3E3A;
+  opacity: 0.4;
+  font-size: 1.125rem;
+  transition: transform 0.2s ease;
+}
+
+.homepage-psa__card--secondary:hover .homepage-psa__card-arrow {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   插畫小面板 .psa-illus（純 CSS 繪製，簡約灰綠）
+   ========================================================================== */
+
+:root {
+  --psa-ink: rgba(55, 63, 60, 0.70);
+  --psa-ink-soft: rgba(55, 63, 60, 0.22);
+  --psa-panel: #f5f3ee;
+  --psa-g2: #c7d0c7;
+  --psa-g3: #aebbb0;
+  --psa-g4: #8f9f93;
+  --psa-warm: rgba(170, 150, 110, 0.55);
+  --psa-hill-1: #eceeed;
+  --psa-hill-2: #d7dcd9;
+  --psa-hill-3: #bbc4bf;
+  --psa-hill-4: #98a39d;
+  --psa-hill-5: #7d8a83;
+  --psa-camera: #4a634f;
+}
+
+.psa-illus {
+  width: 96px;
+  height: 72px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============ 第一張：單一「四功能」圖示（不是四宮格） ============ */
+.psa-illus--toolSingle {
+  border-radius: 12px;
+  border: 1px solid var(--psa-ink-soft);
+  background:
+    radial-gradient(80px 48px at 30% 25%, rgba(255,255,255,0.60), rgba(255,255,255,0) 60%),
+    radial-gradient(70px 44px at 75% 70%, rgba(255,255,255,0.40), rgba(255,255,255,0) 65%),
+    linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0)),
+    var(--psa-panel);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+}
+
+/* 相機本體 */
+.psa-toolSingle__cam {
+  position: absolute;
+  left: 14px;
+  bottom: 18px;
+  width: 44px;
+  height: 26px;
+  border-radius: 8px;
+  border: 1px solid var(--psa-ink-soft);
+  background: rgba(160, 175, 168, 0.18);
+}
+
+/* 光圈環（暗示景深/曝光） */
+.psa-toolSingle__ring {
+  position: absolute;
+  left: 36px;
+  bottom: 20px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(90, 105, 98, 0.38);
+  background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.10) 35%, rgba(120,135,128,0.15) 36%);
+}
+
+/* 小太陽（日落） */
+.psa-toolSingle__sun {
+  position: absolute;
+  left: 58px;
+  bottom: 36px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--psa-warm);
+  box-shadow:
+    -10px 6px 0 -6px var(--psa-warm),
+    10px 6px 0 -6px var(--psa-warm),
+    0 14px 0 -7px var(--psa-warm);
+  opacity: 0.95;
+}
+
+/* ND 方片（濾鏡） */
+.psa-toolSingle__nd {
+  position: absolute;
+  left: 64px;
+  bottom: 20px;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(90, 105, 98, 0.28);
+  background: rgba(150, 165, 158, 0.20);
+  transform: rotate(-8deg);
+}
+
+/* ============ 第二張：裸直方圖（不要外框） ============ */
+.psa-illus--histBare {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.psa-illus--histBare .psa-histBare__bar {
+  position: absolute;
+  bottom: 16px;
+  width: 7px;
+  border-radius: 3px 3px 2px 2px;
+  background: rgba(120, 135, 128, 0.55);
+}
+
+.psa-illus--histBare .psa-histBare__bar.b1 { left: 18px; height: 10px; opacity: 0.55; }
+.psa-illus--histBare .psa-histBare__bar.b2 { left: 30px; height: 18px; opacity: 0.60; }
+.psa-illus--histBare .psa-histBare__bar.b3 { left: 42px; height: 30px; opacity: 0.70; }
+.psa-illus--histBare .psa-histBare__bar.b4 { left: 54px; height: 22px; opacity: 0.65; }
+.psa-illus--histBare .psa-histBare__bar.b5 { left: 66px; height: 14px; opacity: 0.58; }
+.psa-illus--histBare .psa-histBare__bar.b6 { left: 78px; height: 8px; opacity: 0.52; }
+
+/* ==========================================================================
+   RWD：手機版
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .homepage-psa__hero {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .homepage-psa__camera-wrap {
+    justify-content: center;
+  }
+
+  .homepage-psa__camera-wrap svg {
+    width: 360px;
+    max-width: 100%;
+  }
+
+  .homepage-psa[data-psa-home="true"] .homepage-psa__title {
+    font-size: clamp(1.75rem, 6vw, 2.25rem);
+  }
+
+  .homepage-psa__subtitle {
+    font-size: 1rem;
+  }
+
+  .homepage-psa__right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-psa[data-psa-home="true"] {
+    padding: 0;
+  }
+
+  .homepage-psa__hero {
+    padding: 48px 1.25rem;
+  }
+
+  .homepage-psa[data-psa-home="true"] .homepage-psa__title {
+    font-size: 1.5rem;
+  }
+
+  .homepage-psa__subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .homepage-psa__camera-wrap {
+    justify-content: center;
+  }
+
+  .homepage-psa__camera-wrap svg {
+    width: 220px !important;
+  }
+
+  .homepage-psa__card {
+    flex-wrap: wrap;
+    padding: 24px 20px;
+    gap: 14px;
+  }
+
+  .homepage-psa__card--primary .homepage-psa__btn-primary {
+    width: 100%;
+  }
+
+  .homepage-psa__card-title {
+    font-size: 18px;
+  }
+
+  .homepage-psa__card-desc {
+    font-size: 13px;
+  }
+
+  .psa-illus {
+    width: 84px;
+    height: 64px;
+  }
+}
+
+/* 背景山丘 SVG */
+.homepage-psa__hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 0;
+  filter: saturate(0.55) contrast(0.98) brightness(1.02);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.55) 14%,
+    rgba(0, 0, 0, 1) 35%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.55) 14%,
+    rgba(0, 0, 0, 1) 35%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.homepage-psa__left,
+.homepage-psa__right {
+  position: relative;
+  z-index: 2;
+}
+
+.homepage-psa__hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+      1200px 520px at 25% 25%,
+      rgba(255, 255, 255, 0.75) 0%,
+      rgba(255, 255, 255, 0.35) 45%,
+      rgba(255, 255, 255, 0.1) 70%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(245, 245, 245, 0.65) 0%,
+      rgba(245, 245, 245, 0.25) 40%,
+      rgba(245, 245, 245, 0.1) 65%,
+      rgba(245, 245, 245, 0) 100%
+    );
+}
+
+/* 像素風插畫容器：透明無框，不影響卡片背景 */
+.psa-illus--pixel {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  width: 96px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.psa-pixelIllus {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  image-rendering: pixelated;
+}
+.psa-pixelIllus--hist {
+  opacity: 0.95;
+}
+.psa-illus--hist {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   覆蓋：右側卡片文字排版、CTA 按鈕、第二張箭頭
+   ========================================================================== */
+
+/* 一、卡片文字排版 */
+.homepage-psa__right .homepage-psa__card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  min-height: 0;
+}
+
+.homepage-psa__right .homepage-psa__card-title {
+  line-height: 1.2;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+.homepage-psa__right .homepage-psa__card-desc {
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+/* 二、第二張卡片箭頭：低調灰階 */
+.homepage-psa__card--secondary .homepage-psa__card-arrow {
+  color: #8a8a8a;
+  opacity: 0.35;
+}
+
+/* ==========================================================================
+   FIX: 右側卡片排版與互動
+   ========================================================================== */
+
+.homepage-psa__right .homepage-psa__card,
+.homepage-psa__right .psa-card {
+  position: relative;
+}
+
+/* 左側文字區塊：最小寬度保護，垂直置中 */
+.homepage-psa__right .homepage-psa__card-content {
+  flex: 1 1 auto;
+  min-width: 180px;
+}
+
+/* 標題：不要亂斷行，避免「計算/器」 */
+.homepage-psa__right .homepage-psa__card-title {
+  line-height: 1.2;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  white-space: normal;
+}
+
+/* 副標：穩定行高 */
+.homepage-psa__right .homepage-psa__card-desc {
+  line-height: 1.5;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* 插畫區：不縮小 */
+.homepage-psa__right .psa-illus {
+  flex-shrink: 0;
+}
+
+/* 右側兩張卡片：統一 hover 浮起 + 陰影 */
+.homepage-psa__right .homepage-psa__card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.homepage-psa__right .homepage-psa__card:hover,
+.homepage-psa__right .homepage-psa__card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}

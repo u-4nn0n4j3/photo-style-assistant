@@ -1,0 +1,3110 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   日系極簡風格 - 抹茶拿鐵配色 / しっぽり明朝 全站字體
+   ========================================================================== */
+
+* {
+  font-family: "Shippori Mincho", "Noto Serif TC", "Microsoft JhengHei", serif;
+}
+
+body {
+  font-family: "Shippori Mincho", "Noto Serif TC", "Microsoft JhengHei", serif;
+}
+
+button,
+.button,
+.btn,
+input,
+select,
+textarea {
+  font-family: "Shippori Mincho", "Noto Serif TC", "Microsoft JhengHei", serif;
+}
+
+/* 字重層次（strong/.important 需在 p/span/div 之後以正確覆蓋） */
+p, span, div {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-weight: 400;
+}
+
+h1, .title, .hero-title {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-weight: 700;
+}
+
+h2, h3, .subtitle {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-weight: 600;
+}
+
+strong, b, .important {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-weight: 600;
+}
+
+:root {
+  /* 主色 - 抹茶拿鐵色系 */
+  --color-matcha-primary: #B5C4A8; /* 抹茶綠 - active、強調、進度條原圖 */
+  --color-dark-matcha: #6B8C6B; /* 深抹茶 - 標題、重要數值 */
+  --color-light-matcha: #D4DECC; /* 淺抹茶 - 卡片背景、hover */
+  --color-milk-tea: #E8DFD0; /* 奶茶米 - 區塊背景 */
+  --color-rice-white: #F5F2EB; /* 米白 - 頁面最底層背景 */
+  /* 搭配色 */
+  --color-mint-gray: #A8B5A2; /* 薄荷灰綠 - 參考圖進度條 */
+  --color-smoky-pink: #D4A5A5; /* 煙燻粉 - 警告提示框背景 */
+  --color-deep-rose: #8B4455; /* 深玫瑰 - 警告文字與圖示 */
+  --color-pure-white: #FFFFFF; /* 純白 - 卡片內層、彈出層 */
+  --color-border-line: #D4DECC; /* 分隔線 - 淺抹茶系 */
+  --color-caramel: #8B7355; /* 焦糖 - 僅用於 Lightroom 漸層背景 */
+
+  --color-bg-primary: var(--color-matcha-primary);
+  --color-bg-secondary: var(--color-light-matcha);
+  --color-bg-tertiary: var(--color-milk-tea);
+
+  --color-accent-primary: var(--color-matcha-primary);
+  --color-accent-secondary: var(--color-dark-matcha);
+  --color-accent-hover: var(--color-light-matcha);
+
+  --color-dark-primary: var(--color-dark-matcha);
+  --color-dark-secondary: var(--color-dark-matcha);
+
+  --color-text-primary: #3D4A3D; /* 深墨綠 - 主要文字 */
+  --color-text-secondary: #3D4A3D;
+  --color-text-tertiary: var(--color-mint-gray);
+
+  --color-border-primary: var(--color-border-line);
+  --color-border-secondary: rgba(212, 222, 204, 0.6);
+
+  --color-warning: var(--color-deep-rose);
+  --color-warning-bg: var(--color-smoky-pink);
+  --color-success: var(--color-mint-gray);
+  --color-success-bg: rgba(168, 181, 162, 0.2);
+  --color-info: var(--color-dark-matcha);
+
+  --font-title: "Shippori Mincho", "Noto Serif TC", "Microsoft JhengHei", serif;
+  --font-body: "Shippori Mincho", "Noto Serif TC", "Microsoft JhengHei", serif;
+
+  /* 圓角與陰影 */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --shadow-card: 0 2px 12px rgba(61, 74, 61, 0.08);
+  --shadow-sm: 0 2px 8px rgba(61, 74, 61, 0.06);
+  --shadow-md: 0 2px 12px rgba(61, 74, 61, 0.08);
+  --shadow-lg: 0 2px 12px rgba(61, 74, 61, 0.1);
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-weight: 300;
+  color-scheme: light;
+  color: var(--color-text-primary);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-rice-white);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* 主要區塊背景：抹茶綠 15% 疊加在米白上 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(181, 196, 168, 0.15) 30%, rgba(181, 196, 168, 0.15) 70%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 標題字體 - 日系極簡 */
+h1,
+.site-title,
+.page-title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--color-dark-matcha);
+  line-height: 1.8;
+  letter-spacing: 0.15em;
+}
+
+h2,
+.card-title,
+.section-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-dark-matcha);
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+}
+
+h3,
+.subsection-title {
+  font-family: var(--font-title);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-dark-matcha);
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+}
+
+/* 標題裝飾 - 簡約 */
+.card-title,
+.section-title,
+h2,
+h3 {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: var(--color-dark-matcha);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  position: relative;
+  display: inline-block;
+  padding-left: 28px;
+}
+
+.card-title::before,
+.section-title::before,
+h2::before,
+h3::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 0 0/8px 8px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 8px 8px/8px 8px;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+}
+
+h4,
+h5 {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+/* App 容器與主內容 */
+.app-container,
+.main-content,
+main {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.app-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem 3rem;
+  min-height: 100vh;
+}
+
+.main-content,
+.app-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ==========================================================================
+   頂部：Logo + 導航
+   ========================================================================== */
+
+.site-header {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+  background: rgba(181, 196, 168, 0.2);
+  border-bottom: 1px solid var(--color-border-line);
+  margin-bottom: 2rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.site-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* 相機 Logo - 抹茶色系 */
+.pixel-camera-logo {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(135deg, #6B8C6B 0%, #3D4A3D 100%) 8px 16px/32px 24px,
+    linear-gradient(#6B8C6B 0 0) 8px 12px/32px 8px,
+    linear-gradient(#3D4A3D 0 0) 16px 20px/16px 16px,
+    linear-gradient(#6B8C6B 0 0) 18px 22px/12px 12px,
+    radial-gradient(circle, #A8B5A2 0%, #B5C4A8 60%, #6B8C6B 100%) 20px 24px/8px 8px,
+    linear-gradient(#D4DECC 0 0) 22px 26px/4px 4px,
+    linear-gradient(#3D4A3D 0 0) 12px 8px/8px 6px,
+    linear-gradient(#D4DECC 0 0) 32px 8px/6px 6px,
+    linear-gradient(#F5F2EB 0 0) 32px 8px/4px 2px;
+  background-repeat: no-repeat;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+/* 導航標籤 */
+.nav-tabs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  background: transparent;
+  border-bottom: 1px solid var(--color-border-line);
+}
+
+.nav-tab,
+.tool-tab,
+.scenario-btn,
+.tolerance-btn,
+button[role="tab"] {
+  padding: 0.875rem 1.5rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.nav-tab {
+  font-size: 0.9rem;
+  padding: 0.875rem 1.75rem;
+  letter-spacing: 0.1em;
+}
+
+.nav-tab:hover,
+.tool-tab:hover,
+.scenario-btn:hover {
+  background: #C8D4C0; /* 淺抹茶 hover 加深 */
+}
+
+.nav-tab.active,
+.tool-tab.active,
+.scenario-btn.active {
+  background: var(--color-matcha-primary);
+  color: var(--color-pure-white);
+  border-color: var(--color-matcha-primary);
+}
+
+/* ==========================================================================
+   工具選擇標籤
+   ========================================================================== */
+
+.tool-tabs {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.tool-tab {
+  flex: 0 0 auto;
+  min-width: auto;
+  padding: 0.875rem 1.5rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-tab::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* 景深工具 - 精緻光圈 */
+.tool-tab[data-tool="depth"]::before {
+  background:
+    linear-gradient(#4a6572 0 0) 2px 2px/12px 12px,
+    linear-gradient(#344955 0 0) 4px 4px/8px 8px,
+    linear-gradient(#6b8a9a 0 0) 4px 0/2px 16px,
+    linear-gradient(#6b8a9a 0 0) 10px 0/2px 16px,
+    linear-gradient(#6b8a9a 0 0) 0 6px/16px 2px,
+    linear-gradient(#6b8a9a 0 0) 0 10px/16px 2px,
+    linear-gradient(#344955 0 0) 6px 6px/4px 4px,
+    linear-gradient(#c8dae3 0 0) 7px 7px/2px 2px;
+  background-repeat: no-repeat;
+}
+
+/* 曝光三角 - 帶光影 */
+.tool-tab[data-tool="exposure"]::before {
+  background:
+    linear-gradient(#344955 0 0) 8px 3px/1px 1px,
+    linear-gradient(#344955 0 0) 6px 6px/5px 2px,
+    linear-gradient(#344955 0 0) 4px 10px/9px 2px,
+    linear-gradient(#344955 0 0) 2px 14px/13px 2px,
+    linear-gradient(#6b8a9a 0 0) 7px 2px/2px 2px,
+    linear-gradient(#6b8a9a 0 0) 5px 6px/6px 2px,
+    linear-gradient(#6b8a9a 0 0) 3px 10px/10px 2px,
+    linear-gradient(#6b8a9a 0 0) 1px 14px/14px 2px,
+    linear-gradient(#c8dae3 0 0) 6px 10px/4px 1px;
+  background-repeat: no-repeat;
+}
+
+/* ND 濾鏡 - 漸層玻璃 */
+.tool-tab[data-tool="nd"]::before {
+  background:
+    linear-gradient(#344955 0 0) 0 0/16px 16px,
+    linear-gradient(#4a6572 0 0) 2px 2px/12px 12px,
+    linear-gradient(to bottom, #6b8a9a, #4a6572) 3px 3px/10px 10px,
+    linear-gradient(#c8dae3 0 0) 4px 4px/8px 2px;
+  background-repeat: no-repeat;
+}
+
+/* 日落 - 細緻太陽 */
+.tool-tab[data-tool="golden"]::before {
+  background:
+    linear-gradient(#f59e0b 0 0) 6px 6px/4px 4px,
+    linear-gradient(#fbbf24 0 0) 7px 1px/2px 4px,
+    linear-gradient(#fbbf24 0 0) 7px 11px/2px 4px,
+    linear-gradient(#fbbf24 0 0) 1px 7px/4px 2px,
+    linear-gradient(#fbbf24 0 0) 11px 7px/4px 2px,
+    linear-gradient(#6b8a9a 0 0) 0 13px/16px 3px;
+  background-repeat: no-repeat;
+}
+
+/* 情境推薦 - 1041uuu 可愛簡約像素圖示 */
+.scenario-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.scenario-btn::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* 人像 - 細緻 + 青藍色 */
+.scenario-btn[data-scenario="portrait"]::before {
+  background:
+    linear-gradient(#344955 0 0) 11px 5px/10px 10px,
+    linear-gradient(#4a6572 0 0) 10px 4px/12px 12px,
+    linear-gradient(#6b8a9a 0 0) 12px 8px/8px 6px,
+    linear-gradient(#4a6572 0 0) 8px 16px/16px 12px,
+    linear-gradient(#5a7a8a 0 0) 4px 18px/4px 8px,
+    linear-gradient(#5a7a8a 0 0) 24px 18px/4px 8px;
+  background-repeat: no-repeat;
+}
+
+/* 風景 - 細緻 + 青藍色 */
+.scenario-btn[data-scenario="landscape"]::before {
+  background:
+    linear-gradient(#7a9aaa 0 0) 4px 16px/10px 8px,
+    linear-gradient(#7a9aaa 0 0) 12px 12px/12px 12px,
+    linear-gradient(#344955 0 0) 17px 18px/12px 10px,
+    linear-gradient(#4a6572 0 0) 16px 16px/12px 12px,
+    linear-gradient(#6b8a9a 0 0) 18px 16px/8px 8px,
+    linear-gradient(#5a7a8a 0 0) 0 24px/32px 8px;
+  background-repeat: no-repeat;
+}
+
+/* 運動 - 細緻 + 青藍色 */
+.scenario-btn[data-scenario="sports"]::before {
+  background:
+    linear-gradient(#344955 0 0) 9px 9px/14px 14px,
+    linear-gradient(#4a6572 0 0) 8px 8px/16px 16px,
+    linear-gradient(#6b8a9a 0 0) 10px 10px/12px 12px,
+    linear-gradient(#c8dae3 0 0) 12px 12px/6px 6px,
+    linear-gradient(#e8f0f5 0 0) 14px 14px/2px 2px;
+  background-repeat: no-repeat;
+}
+
+/* 夜景 - 細緻 + 青藍色 */
+.scenario-btn[data-scenario="night"]::before {
+  background:
+    linear-gradient(#344955 0 0) 9px 11px/14px 14px,
+    linear-gradient(#6b8a9a 0 0) 8px 10px/14px 14px,
+    linear-gradient(#4a6572 0 0) 14px 12px/10px 10px,
+    linear-gradient(#c8dae3 0 0) 10px 12px/6px 6px,
+    linear-gradient(#fbbf24 0 0) 24px 6px/3px 3px,
+    linear-gradient(#fbbf24 0 0) 4px 8px/2px 2px;
+  background-repeat: no-repeat;
+}
+
+/* 日落 - 細緻太陽 + 地平線 */
+.scenario-btn[data-scenario="sunset"]::before {
+  background:
+    linear-gradient(#f59e0b 0 0) 10px 6px/12px 12px,
+    linear-gradient(#fbbf24 0 0) 12px 8px/8px 8px,
+    linear-gradient(#fcd34d 0 0) 14px 10px/4px 4px,
+    linear-gradient(#4a6572 0 0) 0 18px/32px 4px,
+    linear-gradient(#344955 0 0) 0 22px/32px 10px,
+    linear-gradient(#f59e0b 0 0) 14px 18px/4px 2px;
+  background-repeat: no-repeat;
+}
+
+.scenario-btn[data-scenario="studio"]::before {
+  background:
+    linear-gradient(var(--color-accent-primary) 0 0) 0 0/32px 4px,
+    linear-gradient(var(--color-accent-primary) 0 0) 0 28px/32px 4px,
+    linear-gradient(var(--color-accent-primary) 0 0) 0 0/4px 32px,
+    linear-gradient(var(--color-accent-primary) 0 0) 28px 0/4px 32px,
+    linear-gradient(var(--color-accent-primary) 0 0) 10px 10px/12px 12px;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   卡片樣式 - 像素邊角雜誌風
+   ========================================================================== */
+
+.card,
+.calculator-card,
+.result-card,
+.analysis-card,
+.recommendation-card,
+.scenario-recommender,
+.exposure-risk-detection,
+.dof-visualization {
+  background: var(--color-light-matcha);
+  padding: 28px 32px;
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.info-card {
+  background: var(--color-light-matcha);
+  padding: 28px 32px;
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.info-card .card-title,
+.info-card h2,
+.info-card h3 {
+  color: var(--color-dark-primary);
+}
+
+.info-card p,
+.info-card .card-content {
+  color: var(--color-dark-primary);
+}
+
+.card::before,
+.card::after,
+.calculator-card::before,
+.calculator-card::after,
+.result-card::before,
+.result-card::after,
+.analysis-card::before,
+.analysis-card::after,
+.info-card::before,
+.info-card::after,
+.recommendation-card::before,
+.recommendation-card::after {
+  display: none;
+}
+
+/* 移除內部方格裝飾，只保留卡片外框邊角（上傳區雙框在下方單獨設定） */
+.upload-area::before,
+.upload-area::after {
+  display: none;
+}
+
+.reference-photo-section::before,
+.reference-photo-section::after,
+.style-reference-upload::before,
+.style-reference-upload::after {
+  display: none;
+}
+
+.calculator-content::before,
+.calculator-content::after,
+.tool-content::before,
+.tool-content::after {
+  display: none;
+}
+
+.card-content::before,
+.card-content::after,
+.section-content::before,
+.section-content::after {
+  display: none;
+}
+
+.card-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-dark-matcha);
+  margin: 0 0 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.1em;
+  position: relative;
+  display: inline-block;
+}
+
+.card-title::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 0 0/8px 8px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 8px 8px/8px 8px;
+  background-repeat: no-repeat;
+}
+
+/* 移除純裝飾性標題前方格與情境按鈕方塊 + 全站綠色符號（小綠色方塊/葉片） */
+.section-title::before,
+.card-title::before,
+h2::before,
+h3::before {
+  display: none;
+}
+
+.scenario-btn::before {
+  display: none;
+}
+
+/* 拍攝後分析 - 共用 sectionHeader 結構 */
+.analysis-section-title,
+.photo-analysis-title {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-dark-primary);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.analysis-title {
+  padding-left: 0;
+}
+
+.analysis-title::before {
+  display: none;
+}
+
+/* card-title 的像素裝飾由全域 Step 2 樣式覆蓋 */
+
+/* ==========================================================================
+   按鈕樣式 - 像素 3D
+   ========================================================================== */
+
+.btn-primary,
+.btn-calculate,
+.btn-recommend,
+button[type="submit"],
+.calculate-button,
+.recommend-button,
+.query-button {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  background: var(--color-matcha-primary);
+  border: 1px solid var(--color-matcha-primary);
+  border-radius: var(--radius-lg);
+  color: var(--color-pure-white);
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  letter-spacing: 0.1em;
+  font-family: var(--font-body);
+}
+
+.btn-primary:hover,
+.btn-calculate:hover,
+.btn-recommend:hover,
+button[type="submit"]:hover,
+.calculate-button:hover,
+.recommend-button:hover,
+.query-button:hover {
+  background: #9BAE8E; /* 抹茶綠加深 */
+}
+
+.btn-primary:active,
+.btn-calculate:active,
+.btn-recommend:active {
+  background: #8A9D7D;
+}
+
+/* ==========================================================================
+   表單輸入
+   ========================================================================== */
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea,
+.input-field {
+  padding: 0.875rem 1rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  font-weight: 400;
+  transition: background 0.2s ease;
+  font-family: var(--font-body);
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-matcha-primary);
+}
+
+.input-label,
+label {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+select {
+  color: var(--color-text-primary);
+}
+
+select option {
+  color: var(--color-text-primary);
+  background: var(--color-light-matcha);
+}
+
+/* ==========================================================================
+   結果顯示卡
+   ========================================================================== */
+
+.result-item,
+.result-value-card,
+.setting-item {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--radius-lg);
+  position: relative;
+  color: var(--color-text-primary);
+}
+
+.result-item::before,
+.result-item::after,
+.result-value-card::before,
+.result-value-card::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--color-accent-primary);
+}
+
+.result-item::before,
+.result-value-card::before {
+  top: -3px;
+  left: -3px;
+}
+
+.result-item::after,
+.result-value-card::after {
+  bottom: -3px;
+  right: -3px;
+}
+
+.result-label,
+.setting-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.result-value,
+.setting-value {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-dark-matcha);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+.result-section {
+  position: relative;
+  padding: 2.5rem 2rem 2rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  margin-top: 2rem;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+.result-section::before {
+  content: "RESULT";
+  position: absolute;
+  top: -14px;
+  left: 40px;
+  background: var(--color-matcha-primary);
+  color: var(--color-pure-white);
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-title);
+  line-height: 1;
+}
+
+/* ==========================================================================
+   景深視覺化條 - 青藍版本
+   ========================================================================== */
+
+.dof-visual-wrapper {
+  margin-top: 1rem;
+}
+
+.dof-bar {
+  height: 60px;
+  display: flex;
+  position: relative;
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.blur-zone {
+  background: linear-gradient(
+    to right,
+    var(--color-light-matcha),
+    var(--color-border-line)
+  );
+  opacity: 0.6;
+}
+
+.sharp-zone {
+  background: linear-gradient(
+    135deg,
+    var(--color-matcha-primary),
+    var(--color-mint-gray)
+  );
+}
+
+/* F) 景深對焦點標記線 - 深灰 2px，避免被 overflow 裁切 */
+.focus-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  min-width: 2px;
+  background: #4a4a46;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   進度條樣式
+   ========================================================================== */
+
+.progress-bar {
+  height: 20px;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-matcha-primary);
+  transition: width 0.8s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.1) 0px,
+      rgba(255, 255, 255, 0.1) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  background-size: 8px 100%;
+}
+
+/* ==========================================================================
+   風險提示卡片
+   ========================================================================== */
+
+.exposure-risk-detection {
+  margin-top: 2rem;
+  padding: 28px 32px;
+  background: var(--color-light-matcha);
+  border-radius: 12px;
+  border: 1px solid var(--color-border-line);
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+.risk-detection-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: var(--color-dark-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.risk-detection-title::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(var(--color-accent-primary) 0 0) 8px 0/4px 4px,
+    linear-gradient(var(--color-accent-primary) 0 0) 4px 4px/12px 12px,
+    linear-gradient(var(--color-accent-primary) 0 0) 2px 8px/4px 8px,
+    linear-gradient(var(--color-accent-primary) 0 0) 14px 8px/4px 8px;
+  background-repeat: no-repeat;
+}
+
+.risk-alerts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.risk-alert {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-left-width: 4px;
+  border-left-style: solid;
+  animation: slideIn 0.3s ease-out;
+  border-radius: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 手震風險 - 煙燻粉背景、深玫瑰文字 */
+.risk-alert.risk-warning,
+.camera-shake-risk {
+  background: var(--color-smoky-pink);
+  border-left: 4px solid var(--color-deep-rose);
+  border: 1px solid rgba(139, 68, 85, 0.3);
+  border-left-width: 4px;
+}
+
+/* 噪點風險 */
+.risk-alert.noise-risk,
+.noise-risk-card {
+  background: var(--color-smoky-pink);
+  border: 1px solid rgba(139, 68, 85, 0.3);
+  border-left: 4px solid var(--color-deep-rose);
+}
+
+.risk-info {
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-left: 4px solid var(--color-matcha-primary);
+}
+
+/* 成功訊息 */
+.risk-alert.risk-success {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-mint-gray);
+  border-left: 4px solid var(--color-mint-gray);
+}
+
+.risk-success {
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-mint-gray);
+  border-left: 4px solid var(--color-mint-gray);
+}
+
+.risk-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+  overflow: hidden;
+}
+
+/* 警示圖示改為深玫瑰 */
+.risk-warning .risk-icon,
+.camera-shake-icon,
+.noise-icon {
+  color: var(--color-deep-rose);
+}
+
+.risk-warning .risk-title {
+  color: var(--color-deep-rose);
+  font-weight: 400;
+}
+
+/* 手震 - 相機像素圖（深玫瑰） */
+.risk-warning .risk-icon {
+  filter: none;
+  background:
+    linear-gradient(var(--color-deep-rose) 0 0) 4px 8px/12px 10px,
+    linear-gradient(var(--color-deep-rose) 0 0) 8px 4px/4px 4px,
+    linear-gradient(var(--color-deep-rose) 0 0) 10px 6px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+/* 噪點 - 太陽/光線像素圖（深玫瑰） */
+.risk-info .risk-icon {
+  background:
+    linear-gradient(var(--color-deep-rose) 0 0) 10px 4px/4px 4px,
+    linear-gradient(var(--color-deep-rose) 0 0) 8px 8px/8px 2px,
+    linear-gradient(var(--color-deep-rose) 0 0) 4px 12px/2px 4px,
+    linear-gradient(var(--color-deep-rose) 0 0) 18px 12px/2px 4px;
+  background-repeat: no-repeat;
+}
+
+/* 良好 - 勾選像素圖 */
+.risk-success .risk-icon {
+  background:
+    linear-gradient(var(--color-success) 0 0) 2px 10px/4px 4px,
+    linear-gradient(var(--color-success) 0 0) 6px 14px/2px 4px,
+    linear-gradient(var(--color-success) 0 0) 8px 12px/8px 2px;
+  background-repeat: no-repeat;
+}
+
+.risk-content {
+  flex: 1;
+}
+
+.risk-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.risk-description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+}
+
+.risk-suggestions {
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.risk-suggestions strong {
+  display: block;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.risk-suggestions ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.risk-suggestions li {
+  margin-bottom: 0.375rem;
+}
+
+.risk-suggestions li:last-child {
+  margin-bottom: 0;
+}
+
+.noise-tolerance-setting {
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--color-border-primary);
+  margin-top: 1.5rem;
+}
+
+.tolerance-section-title {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--color-dark-primary);
+  margin-bottom: 0.5rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tolerance-section-title::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(var(--color-accent-primary) 0 0) 2px 12px/4px 8px,
+    linear-gradient(var(--color-accent-primary) 0 0) 8px 8px/4px 12px,
+    linear-gradient(var(--color-accent-primary) 0 0) 14px 4px/4px 16px;
+  background-repeat: no-repeat;
+}
+
+.tolerance-description {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-light-matcha);
+  border-left: 3px solid var(--color-matcha-primary);
+  border-radius: var(--radius-md);
+}
+
+/* 資訊提示框 / Alert（Step 5） */
+.info-block,
+.alert-card,
+.tolerance-description {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--color-matcha-primary);
+  background: var(--color-light-matcha);
+  margin: 1rem 0;
+  position: relative;
+  color: var(--color-text-primary);
+}
+
+.info-block::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--color-matcha-primary);
+}
+
+.tolerance-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.tolerance-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tolerance-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+  min-height: 90px;
+}
+
+.tolerance-btn:hover {
+  background: #C8D4C0;
+}
+
+.tolerance-btn.active {
+  background: var(--color-matcha-primary);
+  color: var(--color-pure-white);
+  border-color: var(--color-matcha-primary);
+}
+
+.btn-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4;
+}
+
+/* 畫質要求 - 像素圖示（取代 emoji） */
+.tolerance-btn .btn-title::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* 極致畫質 - 鑽石（未選用深抹茶、選中用白） */
+.tolerance-btn:nth-child(1) .btn-title::before {
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 2px/4px 4px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 4px 6px/8px 4px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 10px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+.tolerance-btn.active:nth-child(1) .btn-title::before {
+  background:
+    linear-gradient(var(--color-pure-white) 0 0) 6px 2px/4px 4px,
+    linear-gradient(var(--color-pure-white) 0 0) 4px 6px/8px 4px,
+    linear-gradient(var(--color-pure-white) 0 0) 6px 10px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+/* 平衡模式 - 天秤 */
+.tolerance-btn:nth-child(2) .btn-title::before {
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 0 8px/16px 2px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 2px 6px/4px 4px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 10px 6px/4px 4px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 7px 0/2px 6px;
+  background-repeat: no-repeat;
+}
+
+.tolerance-btn.active:nth-child(2) .btn-title::before {
+  background:
+    linear-gradient(var(--color-pure-white) 0 0) 0 8px/16px 2px,
+    linear-gradient(var(--color-pure-white) 0 0) 2px 6px/4px 4px,
+    linear-gradient(var(--color-pure-white) 0 0) 10px 6px/4px 4px,
+    linear-gradient(var(--color-pure-white) 0 0) 7px 0/2px 6px;
+  background-repeat: no-repeat;
+}
+
+/* 亮度優先 - 閃電 */
+.tolerance-btn:nth-child(3) .btn-title::before {
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 8px 0/2px 8px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 8px/6px 2px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 10px/2px 6px;
+  background-repeat: no-repeat;
+}
+
+.tolerance-btn.active:nth-child(3) .btn-title::before {
+  background:
+    linear-gradient(var(--color-pure-white) 0 0) 8px 0/2px 8px,
+    linear-gradient(var(--color-pure-white) 0 0) 6px 8px/6px 2px,
+    linear-gradient(var(--color-pure-white) 0 0) 6px 10px/2px 6px;
+  background-repeat: no-repeat;
+}
+
+.tolerance-btn.active .btn-title {
+  color: var(--color-pure-white);
+}
+
+.btn-desc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  display: block;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.tolerance-btn.active .btn-desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 一般提示框 - 淺抹茶背景、深墨綠文字 */
+.tolerance-hint,
+.info-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-left: 4px solid var(--color-matcha-primary);
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+  color: var(--color-text-primary);
+}
+
+/* 警告提示框 - 煙燻粉背景、深玫瑰文字 */
+.alert-card.alert-warning,
+.tolerance-hint.warning-hint {
+  background: var(--color-smoky-pink);
+  border-left-color: var(--color-deep-rose);
+  color: var(--color-deep-rose);
+}
+
+/* 景深提示 - 燈泡像素圖 */
+.pixel-icon-bulb {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 0.25rem;
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 2px/4px 4px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 4px 8px/8px 2px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 12px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+.hint-icon {
+  font-size: 0;
+  flex-shrink: 0;
+  line-height: 1.5;
+  width: 16px;
+  height: 16px;
+  background:
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 2px/4px 4px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 4px 8px/8px 2px,
+    linear-gradient(var(--color-dark-matcha) 0 0) 6px 12px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+/* 像素圖示：勾選（取代 ✓） */
+.pixel-icon-check {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  font-size: 0;
+  vertical-align: middle;
+  background:
+    linear-gradient(var(--color-success) 0 0) 2px 10px/4px 4px,
+    linear-gradient(var(--color-success) 0 0) 6px 14px/2px 4px,
+    linear-gradient(var(--color-success) 0 0) 8px 12px/8px 2px;
+  background-repeat: no-repeat;
+}
+
+/* 像素圖示：警告三角（取代 ⚠️） */
+.pixel-icon-warning {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  font-size: 0;
+  vertical-align: middle;
+  background:
+    linear-gradient(var(--color-deep-rose) 0 0) 8px 0/2px 2px,
+    linear-gradient(var(--color-deep-rose) 0 0) 6px 4px/6px 2px,
+    linear-gradient(var(--color-deep-rose) 0 0) 4px 8px/10px 2px,
+    linear-gradient(var(--color-deep-rose) 0 0) 2px 14px/14px 2px;
+  background-repeat: no-repeat;
+}
+
+.hint-text {
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* ==========================================================================
+   攝影像素裝飾（光圈） - Step 3
+   ========================================================================== */
+
+.pixel-decoration-container {
+  padding: 2rem;
+  background: var(--color-bg-secondary);
+  border: 4px solid var(--color-border-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pixel-decoration-container::before,
+.pixel-decoration-container::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--color-accent-primary);
+}
+
+.pixel-decoration-container::before {
+  top: -4px;
+  left: -4px;
+}
+
+.pixel-decoration-container::after {
+  bottom: -4px;
+  right: -4px;
+}
+
+.pixel-aperture {
+  width: 96px;
+  height: 96px;
+  background:
+    /* 光圈葉片設計 */
+    linear-gradient(#577C8A 0 0) 32px 0/32px 16px,
+    linear-gradient(#577C8A 0 0) 32px 80px/32px 16px,
+    linear-gradient(#577C8A 0 0) 0 32px/16px 32px,
+    linear-gradient(#577C8A 0 0) 80px 32px/16px 32px,
+    linear-gradient(#577C8A 0 0) 16px 16px/16px 16px,
+    linear-gradient(#577C8A 0 0) 64px 16px/16px 16px,
+    linear-gradient(#577C8A 0 0) 16px 64px/16px 16px,
+    linear-gradient(#577C8A 0 0) 64px 64px/16px 16px,
+    /* 中心光圈 */
+    linear-gradient(#77969A 0 0) 32px 32px/32px 32px,
+    linear-gradient(#7EBEAB 0 0) 40px 40px/16px 16px;
+  background-repeat: no-repeat;
+}
+
+/* ==========================================================================
+   情境推薦 / 卡片細節（沿用像素風格）
+   ========================================================================== */
+
+.scenario-recommender {
+  margin-top: 2rem;
+}
+
+.scenario-title {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  color: var(--color-dark-primary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.scenario-title::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  background:
+    linear-gradient(var(--color-accent-primary) 0 0) 4px 8px/12px 10px,
+    linear-gradient(var(--color-accent-primary) 0 0) 8px 4px/4px 4px,
+    linear-gradient(var(--color-dark-primary) 0 0) 10px 6px/4px 4px;
+  background-repeat: no-repeat;
+}
+
+/* 上傳區 - 空心虛線邊框 */
+.upload-placeholder,
+.upload-area,
+.photo-upload-zone,
+.reference-upload-zone {
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px dashed var(--color-border-line);
+  padding: 2rem;
+  transition: background 0.2s ease;
+}
+
+/* 上傳區塊整體左對齊（標題、說明靠左；上傳框內部保持置中） */
+.upload-area.photo-upload-zone,
+.upload-area.reference-upload-zone {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.upload-section-title {
+  text-align: left;
+  margin: 0;
+}
+
+.upload-section-description {
+  text-align: left;
+  margin: 0;
+}
+
+.upload-area .upload-placeholder {
+  text-align: center;
+  margin: 0;
+  width: 100%;
+}
+
+.upload-placeholder-icon,
+.upload-icon-box,
+.pixel-upload-icon,
+.upload-icon {
+  display: none !important;
+}
+
+.upload-placeholder::before,
+.upload-area::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 1px dashed var(--color-matcha-primary);
+  pointer-events: none;
+}
+
+.upload-placeholder:hover,
+.upload-area:hover {
+  border-color: var(--color-matcha-primary);
+  background: rgba(212, 222, 204, 0.5);
+}
+
+.upload-placeholder:hover::before,
+.upload-area:hover::before {
+  border-color: var(--color-matcha-primary);
+}
+
+.upload-placeholder .font-medium,
+.upload-placeholder .text-xs {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   分析結果顯示：照片對比分析 + Lightroom 調整建議
+   ========================================================================== */
+
+/* 第一部分：白色卡片 - 照片對比分析 */
+.analysis-comparison-card {
+  background: var(--color-pure-white);
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+.photo-comparison-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+/* 主標題「照片對比分析」- 左對齊 */
+.main-section-title,
+.photo-comparison-section .main-section-title,
+.photo-comparison-section .section-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 24px;
+  margin-top: 0;
+  text-align: left;
+  padding-left: 0;
+}
+
+.analysis-comparison-card .sectionHeader {
+  margin-bottom: 1.25rem;
+}
+
+.analysis-comparison-title {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-dark-primary);
+  margin: 0;
+}
+
+.analysis-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .analysis-comparison-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .analysis-comparison-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.comparison-item-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.comparison-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-dark-primary);
+  margin-bottom: 0.25rem;
+}
+
+/* ========== 統一的條目樣式 ========== */
+.comparison-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.bar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bar-label {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 400;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+/* 進度條容器 - 縮小高度 */
+.bar-container {
+  flex: 1;
+  height: 20px;
+  background: #f5f5f5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 進度條填充 - 品牌配色 */
+.bar-f {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s ease-out;
+  width: 0%;
+}
+
+.bar-f.yours {
+  background: #9db89a;
+}
+
+.bar-f.ref {
+  background: #96adb8;
+}
+
+.bar-f.warn {
+  background: #d4a888;
+}
+
+.temp-value {
+  font-size: 14px;
+  color: #333333;
+  font-weight: 400;
+  flex: 1;
+}
+
+/* ========== 通用對比組樣式（適用於所有對比區域）========== */
+.comparison-group {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.comparison-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* 子標題（亮度對比、飽和度對比、對比度對比、色溫分析）*/
+.comparison-title,
+.group-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 12px;
+  text-align: left;
+  padding-left: 0;
+}
+
+/* 統一的結果提示框（用於所有對比區域）*/
+.comparison-result {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 400;
+  background: #f5f5f5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+/* ==================== 區塊二：分析模式（獨立區塊）==================== */
+.analysis-mode-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.analysis-mode-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 16px;
+  text-align: left;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-icon {
+  color: #7a8a6e;
+  flex-shrink: 0;
+}
+
+.mode-content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mode-data-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-label {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 400;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.mode-value {
+  font-size: 14px;
+  font-weight: 400;
+  color: #333333;
+  flex: 1;
+}
+
+.mode-value.primary {
+  color: #5a6b4e;
+  font-weight: 500;
+}
+
+.mode-description-box {
+  font-size: 14px;
+  color: #666666;
+  font-weight: 400;
+  background: #f5f5f5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+/* ========== 強制移除百分比 ========== */
+.percentage,
+.similarity-percentage,
+.analysis-percentage,
+[data-percentage],
+[data-similarity],
+[data-percent],
+.comparison-result .percentage,
+.comparison-group .percentage,
+.photo-comparison-section .percentage,
+.mode-description-box .percentage,
+.analysis-mode-section .percentage {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* 相同圖片時隱藏進度條旁的百分比 */
+.analysis-result-wrapper[data-same-image="true"] .bar-percentage {
+  display: none !important;
+}
+
+.comparison-result::before,
+.comparison-result::after,
+.mode-description-box::before,
+.mode-description-box::after {
+  content: none !important;
+  display: none !important;
+}
+
+.comparison-result > *:not(:first-child),
+.mode-description-box > *:not(:first-child) {
+  display: none !important;
+}
+
+/* ========== 響應式設計 ========== */
+@media (max-width: 768px) {
+  .photo-comparison-section,
+  .analysis-mode-section {
+    padding: 16px;
+  }
+
+  .bar-item,
+  .mode-data-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .bar-label,
+  .mode-label {
+    min-width: auto;
+  }
+
+  .bar-container {
+    width: 100%;
+  }
+
+  .temp-value {
+    width: 100%;
+  }
+
+  .comparison-bars,
+  .mode-content-grid {
+    gap: 8px;
+  }
+}
+
+/* ========== 深色模式 ========== */
+@media (prefers-color-scheme: dark) {
+  .photo-comparison-section,
+  .analysis-mode-section {
+    background: #1e1e1e;
+  }
+
+  .main-section-title,
+  .comparison-title,
+  .analysis-mode-title,
+  .section-title,
+  .group-title {
+    color: #e5e5e5;
+  }
+
+  .comparison-group {
+    border-bottom-color: #404040;
+  }
+
+  .mode-icon {
+    color: #8a9a7e;
+  }
+
+  .bar-label,
+  .mode-label {
+    color: #a0a0a0;
+  }
+
+  .temp-value,
+  .mode-value {
+    color: #e5e5e5;
+  }
+
+  .bar-container {
+    background: #2a2a2a;
+  }
+
+  .comparison-result,
+  .mode-description-box {
+    background: #2a2a2a;
+    color: #a0a0a0;
+  }
+
+  .mode-value.primary {
+    color: #9aaa8e;
+  }
+}
+
+/* 第二部分：焦糖漸層 - Lightroom 調整建議（僅此區保留棕色系） */
+.lightroom-suggestions-card {
+  background: linear-gradient(135deg, #8B7355 0%, #6B5A42 100%);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+.lightroom-suggestions-title {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.lightroom-suggestions-card .sectionHeader {
+  margin-bottom: 1.25rem;
+}
+
+.lightroom-adjustment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lightroom-adjustment-item {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lightroom-adjustment-name {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 0.5rem 0;
+}
+
+.lightroom-adjustment-value {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+}
+
+.same-image-notice {
+  padding: 0.75rem 1rem;
+  background: rgba(200, 230, 255, 0.25);
+  border: 1px solid rgba(100, 180, 255, 0.4);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--color-dark-primary);
+}
+
+.lighting-effect-warning {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 220, 200, 0.5);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.lighting-effect-warning-title {
+  font-weight: 600;
+  margin: 0 0 0.35rem 0;
+  color: #ffd4c8;
+}
+
+.lightroom-hint-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lightroom-hint-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.lightroom-hint-box p {
+  color: #ffffff;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.lightroom-copy-params-wrap {
+  margin-top: 1.25rem;
+}
+
+.lightroom-copy-params-btn {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .lightroom-adjustment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .lightroom-adjustment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.comparison-bar-track {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.comparison-bar-your-photo,
+.data-bar.user-photo {
+  background: var(--color-matcha-primary);
+  height: 32px;
+  min-width: 2.5rem;
+  position: relative;
+  border-radius: var(--radius-sm);
+}
+
+.comparison-bar-reference,
+.data-bar.reference-photo {
+  background: var(--color-mint-gray);
+  height: 32px;
+  min-width: 2.5rem;
+  position: relative;
+  border-radius: var(--radius-sm);
+}
+
+.comparison-bar-fill-blue {
+  background: var(--color-matcha-primary) !important;
+}
+
+.comparison-bar-fill-purple {
+  background: var(--color-mint-gray) !important;
+}
+
+.bar-percentage {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-dark-primary);
+}
+
+.comparison-bar-reference .bar-percentage,
+.data-bar.reference-photo .bar-percentage {
+  color: var(--color-dark-primary);
+}
+
+/* Lightroom 調整建議區 */
+.lightroom-suggestions {
+  background: linear-gradient(135deg, #8B7355 0%, #6B5A42 100%);
+  padding: 2rem;
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+.lightroom-title {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.adjustment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.adjustment-card {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  transition: background 0.2s ease;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+}
+
+.adjustment-card:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.adjustment-name {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+.adjustment-value {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  color: #ffffff;
+  font-weight: 400;
+}
+
+.adjustment-card.positive {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.adjustment-card.negative {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.adjustment-hint {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: var(--radius-md);
+}
+
+.adjustment-hint::before {
+  content: "💡";
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .adjustment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .adjustment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 調整預覽區 */
+.adjustment-preview-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.adjustment-preview-title {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-dark-primary);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.adjustment-preview-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.adjustment-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.adjustment-preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.adjustment-preview-img-wrap {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4/3;
+  border: 2px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-secondary);
+}
+
+.adjustment-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.adjustment-preview-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-secondary);
+}
+
+.adjustment-preview-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .adjustment-preview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scenario-subtitle {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.scenario-label,
+.preference-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scenario-selection {
+  margin-bottom: 1.5rem;
+}
+
+.scenario-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.scenario-btn {
+  flex: 1;
+  min-width: 100px;
+}
+
+.preference-selection {
+  margin-bottom: 1.5rem;
+}
+
+.preference-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.camera-type-option,
+.preference-item {
+  display: flex;
+  align-items: center;
+  padding: 0.875rem 1rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.camera-type-option:hover,
+.preference-item:hover {
+  background: #C8D4C0;
+}
+
+.camera-type-option.selected,
+.camera-type-option:has(input:checked) {
+  background: var(--color-matcha-primary);
+  border-color: var(--color-matcha-primary);
+  color: var(--color-pure-white);
+}
+
+.camera-type-option.selected *,
+.camera-type-option:has(input:checked) * {
+  color: var(--color-pure-white);
+}
+
+.preference-item input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-matcha-primary);
+}
+
+.preference-item input[type="checkbox"]:checked + span {
+  color: var(--color-dark-matcha);
+  font-weight: 400;
+}
+
+.recommendation-results {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  animation: fadeIn 0.5s ease-in;
+}
+
+.recommendation-card {
+  background: var(--color-light-matcha);
+  border-radius: 12px;
+  padding: 28px 32px;
+  border: 1px solid var(--color-border-line);
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+  transition: background 0.2s ease;
+}
+
+.recommendation-card:hover {
+  background: #C8D4C0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border-line);
+}
+
+.card-badge {
+  background: var(--color-matcha-primary);
+  color: var(--color-pure-white);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+
+.card-title-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.card-settings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.setting-item {
+  text-align: center;
+  padding: 0.75rem;
+  background: var(--color-pure-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-line);
+  color: var(--color-text-primary);
+}
+
+.setting-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.setting-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--color-dark-matcha);
+}
+
+.card-reason {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-left: 4px solid var(--color-matcha-primary);
+  border-radius: var(--radius-md);
+}
+
+.card-reason strong {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.card-reason p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ==========================================================================
+   上傳區 / 分析結果的一些輔助
+   ========================================================================== */
+
+.upload-card {
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  padding: 28px 32px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+}
+
+/* 景深計算器標題 - 共用 sectionHeader 結構，無額外 padding */
+.calculator-title {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-dark-primary);
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* 上傳區像素圖示已於上方統一隱藏 */
+
+.upload-dropzone {
+  border-radius: 0;
+  border-width: 3px;
+}
+
+.upload-preview {
+  border-radius: 0;
+  background: var(--color-bg-tertiary);
+}
+
+/* 分析結果進場動畫 */
+.analysis-result-enter {
+  animation: analysisFadeIn 0.35s ease-out;
+}
+
+@keyframes analysisFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 卡片與結果淡入動畫 / 進場效果（Step 7） */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card,
+.calculator-card,
+.result-card {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.risk-alert,
+.recommendation-card {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* 自訂捲軸樣式（Step 8） */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-matcha-primary);
+  border: 1px solid var(--color-border-line);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9BAE8E;
+}
+
+/* 卡片間距與文字強調（Step 10） */
+.card + .card,
+.calculator-card + .calculator-card {
+  margin-top: 2rem;
+}
+
+.description,
+.subtitle,
+.hint-text {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+strong,
+.highlight {
+  color: var(--color-dark-matcha);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   RWD
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 1.125rem;
+  }
+
+  .main-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .nav-tabs {
+    flex-direction: column;
+  }
+
+  .tool-tabs {
+    justify-content: flex-start;
+  }
+
+  .tool-tab {
+    flex: 0 0 calc(50% - 0.375rem);
+  }
+
+  .calculator-card,
+  .result-card {
+    padding: 1.25rem;
+  }
+
+  .btn-primary,
+  .btn-calculate,
+  .btn-recommend {
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .tolerance-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .tolerance-btn {
+    padding: 0.875rem;
+    min-height: 80px;
+  }
+
+  .scenario-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .scenario-btn {
+    min-width: 100px;
+  }
+
+  .preference-checkboxes {
+    grid-template-columns: 1fr;
+  }
+
+  .card-settings {
+    grid-template-columns: 1fr;
+  }
+
+  .risk-alert {
+    flex-direction: column;
+  }
+
+  .risk-icon {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-tab {
+    flex: 0 0 100%;
+  }
+
+  .tolerance-section-title {
+    font-size: 0.9rem;
+  }
+
+  .tolerance-btn {
+    min-height: 70px;
+    padding: 0.75rem;
+  }
+
+  .exposure-risk-detection {
+    padding: 1rem;
+  }
+
+  .risk-detection-title {
+    font-size: 0.9rem;
+  }
+
+  .risk-alert {
+    padding: 1rem;
+  }
+
+  .scenario-recommender {
+    padding: 0;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .pixel-camera-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  h2,
+  .card-title {
+    font-size: 0.875rem;
+  }
+
+  .btn-primary::before {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   調色逆向工程 - 模式選擇與分析結果
+   ========================================================================== */
+
+.analysis-mode-selector {
+  margin-bottom: 3rem;
+}
+
+.analysis-mode-selector .section-title {
+  margin-bottom: 0.5rem;
+}
+
+.mode-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.mode-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: left;
+}
+
+.mode-btn::before,
+.mode-btn::after {
+  display: none;
+}
+
+.mode-btn:hover {
+  background: #C8D4C0;
+}
+
+.mode-btn.active {
+  background: var(--color-matcha-primary);
+  border-color: var(--color-matcha-primary);
+  color: var(--color-pure-white);
+}
+
+.mode-btn.active .mode-title,
+.mode-btn.active .mode-desc {
+  color: var(--color-pure-white);
+}
+
+.mode-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.mode-content {
+  flex: 1;
+}
+
+.mode-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.mode-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* 調色逆向工程 - 單張上傳區 */
+.reverse-engineering-section .section-title {
+  margin-bottom: 0.5rem;
+}
+
+.section-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.reverse-engineering-section .upload-area {
+  min-height: 180px;
+  border: 3px dashed var(--color-border-primary);
+  background: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reverse-engineering-section .upload-area:hover .upload-placeholder:not(.upload-disabled) {
+  color: var(--color-accent-primary);
+}
+
+.upload-placeholder {
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+}
+
+.upload-placeholder.upload-disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.upload-text {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-dark-primary);
+  margin-bottom: 0.5rem;
+}
+
+.upload-hint {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+/* 分析結果卡片 */
+.reverse-analysis-results {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.analyzed-photo-preview {
+  background: var(--color-bg-secondary);
+  border: 4px solid var(--color-border-secondary);
+  padding: 1.5rem;
+}
+
+.analyzed-photo-preview img {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.photo-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.color-analysis-card,
+.exposure-analysis-card,
+.tone-curve-analysis,
+.lightroom-params-card,
+.style-tags-card {
+  background: var(--color-bg-secondary);
+  border: 4px solid var(--color-border-secondary);
+  padding: 2rem;
+}
+
+.reverse-analysis-results .analysis-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  color: var(--color-dark-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.analysis-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.color-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.color-swatch {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 0.5rem;
+  border: 3px solid var(--color-border-primary);
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-dark-primary);
+}
+
+.stat-tag {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--color-bg-tertiary);
+  color: var(--color-accent-primary);
+  border: 2px solid var(--color-border-primary);
+}
+
+.color-palette h4 {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-dark-primary);
+  margin-bottom: 1rem;
+}
+
+.palette-colors {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.palette-item {
+  flex: 1;
+  text-align: center;
+}
+
+.palette-swatch {
+  width: 100%;
+  height: 60px;
+  border: 3px solid var(--color-border-primary);
+  margin-bottom: 0.5rem;
+}
+
+.palette-percentage {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.histogram-display {
+  margin-bottom: 1.5rem;
+}
+
+.histogram-display canvas,
+.curve-visualization canvas {
+  display: block;
+  border: 2px solid var(--color-border-primary);
+}
+
+.exposure-stats {
+  display: grid;
+  gap: 1rem;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 60px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-bar {
+  height: 24px;
+  background: var(--color-bg-tertiary);
+  border: 2px solid var(--color-border-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-matcha-primary), var(--color-mint-gray));
+  transition: width 0.8s ease;
+}
+
+.curve-description {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.curve-description p {
+  margin: 0;
+}
+
+.params-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.param-section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-dark-primary);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.param-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.param-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--color-bg-tertiary);
+  border-left: 3px solid var(--color-accent-primary);
+}
+
+.param-name {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.param-value {
+  font-family: var(--font-title);
+  font-size: 0.875rem;
+  color: var(--color-accent-primary);
+  font-weight: 700;
+}
+
+.params-note {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-border-line);
+  border-left: 4px solid var(--color-dark-matcha);
+}
+
+.note-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.note-content {
+  flex: 1;
+}
+
+.note-content p {
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  color: var(--color-dark-primary);
+}
+
+.note-content ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.note-content li {
+  margin-bottom: 0.25rem;
+}
+
+.style-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.style-tag {
+  padding: 0.5rem 1rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-dark-matcha);
+  color: var(--color-dark-matcha);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-secondary {
+  padding: 1rem 2rem;
+  background: var(--color-light-matcha);
+  border: 1px solid var(--color-matcha-primary);
+  color: var(--color-dark-matcha);
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #C8D4C0;
+}
+
+@media (max-width: 768px) {
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .params-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-row {
+    grid-template-columns: 100px 1fr 50px;
+    gap: 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   全站移除綠色符號（小綠色方塊/葉片狀 icon，僅此項；其他插畫保留）
+   ========================================================================== */
+.analysis-title::before,
+.risk-detection-title::before,
+.tolerance-section-title::before,
+.scenario-title::before,
+.analysis-comparison-title::before,
+.info-block::before {
+  display: none !important;
+  content: none !important;
+}
+
+.analysis-section-title.analysis-title {
+  padding-left: 0 !important;
+}

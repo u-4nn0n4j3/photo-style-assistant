@@ -375,6 +375,12 @@ h3.homepage-psa__card-title::before {
 }
 
 @media (max-width: 480px) {
+  .homepage-psa__shell {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 16px !important;
+  }
+
   .homepage-psa[data-psa-home="true"] {
     padding: 0;
   }

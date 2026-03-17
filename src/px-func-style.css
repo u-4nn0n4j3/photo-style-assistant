@@ -392,14 +392,14 @@ body:has(.app-container[data-psa-func="true"])::before {
 
 .app-container[data-psa-func="true"] .golden-hour-card {
   background: #e8e4dc !important;
-  border-left: 4px solid #a89888 !important;
+  border-left: 4px solid #c49a6c !important;
   color: var(--fg-ink) !important;
   font-family: "Shippori Mincho", "Noto Serif TC", serif;
 }
 
 .app-container[data-psa-func="true"] .blue-hour-card {
   background: #e0e4e8 !important;
-  border-left: 4px solid #8898a4 !important;
+  border-left: 4px solid #7a9baa !important;
   color: var(--fg-ink) !important;
   font-family: "Shippori Mincho", "Noto Serif TC", serif;
 }
@@ -474,8 +474,8 @@ body:has(.app-container[data-psa-func="true"])::before {
 
 .app-container[data-psa-func="true"] .sunset-row-golden {
   background: rgba(119, 150, 154, 0.15) !important;
-  border: 2px solid #77969A !important;
-  border-left: 4px solid #6C9A8E !important;
+  border: 2px solid #c49a6c !important;
+  border-left: 4px solid #c49a6c !important;
   padding: 12px 16px !important;
   border-radius: 8px !important;
   font-weight: 600;
@@ -484,8 +484,8 @@ body:has(.app-container[data-psa-func="true"])::before {
 /* 藍調時段框框：更突出 */
 .app-container[data-psa-func="true"] .sunset-row-blue-hour {
   background: rgba(87, 124, 138, 0.12) !important;
-  border: 2px solid #577C8A !important;
-  border-left: 4px solid #394A58 !important;
+  border: 2px solid #7a9baa !important;
+  border-left: 4px solid #7a9baa !important;
   padding: 12px 16px !important;
   border-radius: 8px !important;
   font-weight: 600;
@@ -631,6 +631,35 @@ body:has(.app-container[data-psa-func="true"])::before {
   .app-container[data-psa-func="true"] .analysis-mode-selector.mode-card-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Golden Hour / Blue Hour 高亮行：上下兩行（標題 + 時間） */
+  .app-container[data-psa-func="true"] .sunset-row-golden,
+  .app-container[data-psa-func="true"] .sunset-row-blue-hour {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 10px 14px !important;
+    gap: 2px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* 標題行（晨間 Golden Hour / 藍調時段） */
+  .app-container[data-psa-func="true"] .sunset-row-golden span:first-child,
+  .app-container[data-psa-func="true"] .sunset-row-blue-hour span:first-child {
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
+  }
+
+  /* 時間行（06:01 - 07:01） */
+  .app-container[data-psa-func="true"] .sunset-row-golden span:last-child,
+  .app-container[data-psa-func="true"] .sunset-row-blue-hour span:last-child {
+    font-size: 0.78rem !important;
+    white-space: nowrap !important;
+    color: var(--color-text-secondary) !important;
+  }
 }
 
 .app-container[data-psa-func="true"] .mode-btn.mode-card {
@@ -725,6 +754,32 @@ body:has(.app-container[data-psa-func="true"])::before {
 
 .app-container[data-psa-func="true"] .comparison-bar-reference {
   background: var(--fg-accent) !important;
+}
+
+/* 480px 以下：對比分析長條圖顯示 */
+@media (max-width: 480px) {
+  .app-container[data-psa-func="true"] .comparison-bar-track {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .app-container[data-psa-func="true"] .comparison-bar-your-photo,
+  .app-container[data-psa-func="true"] .comparison-bar-reference {
+    display: block !important;
+    height: 10px !important;
+    min-width: 4px !important;
+    border-radius: 5px !important;
+    width: var(--bar-width, 50%) !important;
+  }
+
+  .app-container[data-psa-func="true"] .bar-container {
+    display: block !important;
+    width: 100% !important;
+    min-height: 10px !important;
+    height: 10px !important;
+  }
 }
 
 /* adjustment-hint 燈泡改灰階 */
@@ -848,6 +903,65 @@ body:has(.app-container[data-psa-func="true"])::before {
   }
 }
 
+/* 480px 以下：容器、相機類型、日落時間、取捨說明修正 */
+@media (max-width: 480px) {
+  /* 問題一：功能頁面消除左右灰色邊框 */
+  .app-container[data-psa-func="true"] {
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin: 0 !important;
+  }
+
+  /* 問題二：景深計算器相機類型按鈕 - 三欄等寬、文字不超出 */
+  .app-container[data-psa-func="true"] [role="radiogroup"][aria-label^="相機類型"] {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 6px !important;
+  }
+
+  .app-container[data-psa-func="true"] [role="radiogroup"][aria-label^="相機類型"] > label,
+  .app-container[data-psa-func="true"] [role="radiogroup"][aria-label^="相機類型"] button {
+    font-size: 0.65rem !important;
+    padding: 6px 2px !important;
+    white-space: normal !important;
+    word-break: break-all !important;
+    text-align: center !important;
+    line-height: 1.4 !important;
+    min-height: 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* 問題四：日落時間右側不被截斷 */
+  .app-container[data-psa-func="true"] .sunset-row {
+    overflow: visible !important;
+  }
+
+  .app-container[data-psa-func="true"] .sunset-time-value,
+  .app-container[data-psa-func="true"] .sunset-time-sunrise,
+  .app-container[data-psa-func="true"] .sunset-time-sunset,
+  .app-container[data-psa-func="true"] .sunset-time-golden {
+    min-width: 60px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* 問題三：取捨說明、畫質要求說明文字不被截斷 */
+  .app-container[data-psa-func="true"] .tolerance-btn,
+  .app-container[data-psa-func="true"] .tolerance-description,
+  .app-container[data-psa-func="true"] .card-reason {
+    overflow: visible !important;
+    word-break: keep-all !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .app-container[data-psa-func="true"] .tolerance-btn {
+    min-height: unset !important;
+  }
+}
+
 /* 6) 結果區塊與風險提示：小螢幕全寬、文字不截斷 */
 @media (max-width: 768px) {
   .app-container[data-psa-func="true"] .result-section,
@@ -875,4 +989,41 @@ body:has(.app-container[data-psa-func="true"])::before {
     hyphens: manual;
     font-size: 0.875rem;
   }
+}
+
+/* 滑桿 touch 事件：父層 overflow/touch-action 不攔截 */
+.app-container[data-psa-func="true"] .manual-params-grid,
+.app-container[data-psa-func="true"] .manual-params-card,
+.app-container[data-psa-func="true"] .color-analysis-results {
+  overflow: visible;
+  touch-action: pan-y;
+}
+.app-container[data-psa-func="true"] .manual-param-row {
+  touch-action: pan-x;
+  overflow: visible;
+}
+.app-container[data-psa-func="true"] .manual-param-slider {
+  touch-action: pan-x;
+}
+.app-container[data-psa-func="true"] .scenario-recommender,
+.app-container[data-psa-func="true"] .dof-visualization,
+.app-container[data-psa-func="true"] .exposure-risk-detection {
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+/* 情境推薦區塊滑桿（光圈/快門/ISO 等） */
+[class*="param-slider"],
+[class*="exposure-slider"],
+.result-section input[type="range"] {
+  touch-action: pan-x;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 情境推薦區塊滑桿的父容器 */
+.result-section,
+.exposure-params-grid,
+.params-grid {
+  overflow: visible;
 }

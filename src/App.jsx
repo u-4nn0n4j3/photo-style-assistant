@@ -2671,11 +2671,11 @@ function UploadZone({
 
       {showPreview ? (
         /* 預覽區：隱藏虛線框、照片保持比例、最大高度 300–400px、hover 半透明遮罩、右上角「✕ 重新上傳」僅清除 */
-        <div className="relative flex-1 rounded-xl overflow-hidden bg-[var(--color-bg-tertiary)] min-h-[200px] max-h-[400px] flex items-center justify-center group">
+        <div className="relative rounded-xl overflow-hidden bg-[var(--color-bg-tertiary)] flex items-center justify-center group" style={{ width: "100%", minHeight: "200px" }}>
           <img
             src={imageBase64}
             alt="已上傳預覽"
-            className="w-full max-h-[400px] object-contain"
+            style={{ width: "100%", maxHeight: "400px", objectFit: "contain", display: "block" }}
           />
           {/* Hover 時整張照片上的半透明遮罩 */}
           <div
@@ -2740,7 +2740,7 @@ function ComparisonItem({ label, yours, reference, suggestion, referenceIsWarn }
           <div className="bar-container">
             <div
               className="bar-f yours"
-              style={{ width: `${yoursPct}%` }}
+              style={{ width: `${yoursPct}%`, minWidth: "4px" }}
               role="progressbar"
               aria-valuenow={yours}
               aria-valuemin={0}
@@ -2753,7 +2753,7 @@ function ComparisonItem({ label, yours, reference, suggestion, referenceIsWarn }
           <div className="bar-container">
             <div
               className={refBarClass}
-              style={{ width: `${refPct}%` }}
+              style={{ width: `${refPct}%`, minWidth: "4px" }}
               role="progressbar"
               aria-valuenow={reference}
               aria-valuemin={0}
@@ -2836,7 +2836,7 @@ function ColorTempItem({ yours, reference, suggestion, originalTone, referenceTo
   const proximityText = isSameImage ? "相同圖片" : stripPercentage(suggestion);
 
   return (
-    <div className="comparison-group comparison-item-card">
+    <div className="comparison-group comparison-item-card color-temp-item">
       <h3 className="comparison-title">色溫分析</h3>
       <div className="comparison-bars">
         <div className="bar-item">
@@ -4159,11 +4159,14 @@ function AnalysisResultDisplay({ result, onReset, photoYour, photoRef }) {
                 <div className="bias-dashboard-cell bias-dashboard-cell-center">差異說明</div>
                 <div className="bias-dashboard-cell bias-dashboard-cell-right">參考照片</div>
               </div>
-              <div className="bias-dashboard-row">
-                <div className="bias-dashboard-cell bias-dashboard-cell-left">
-                  <span className="bias-label" data-value={biasData.yours.brightnessBias}>{biasData.yours.brightnessBias}</span>
-                </div>
+              <div className="bias-dashboard-row" data-row="brightness">
+                <div className="bias-dashboard-cell bias-dashboard-cell-left">亮度偏向</div>
                 <div className="bias-dashboard-cell bias-dashboard-cell-center">
+                  <span className="bias-label" data-value={biasData.yours.brightnessBias}>{biasData.yours.brightnessBias}</span>
+                  <span className="bias-arrow" aria-hidden> → </span>
+                  <span className="bias-label" data-value={biasData.reference.brightnessBias}>{biasData.reference.brightnessBias}</span>
+                </div>
+                <div className="bias-dashboard-cell bias-dashboard-cell-right">
                   <p className="bias-diff-text">
                     {(() => {
                       const pct = Math.round(Math.abs(biasData.reference.avgL - biasData.yours.avgL) / 255 * 100);
@@ -4174,34 +4177,31 @@ function AnalysisResultDisplay({ result, onReset, photoYour, photoRef }) {
                     })()}
                   </p>
                 </div>
-                <div className="bias-dashboard-cell bias-dashboard-cell-right">
-                  <span className="bias-label" data-value={biasData.reference.brightnessBias}>{biasData.reference.brightnessBias}</span>
-                </div>
               </div>
-              <div className="bias-dashboard-row">
-                <div className="bias-dashboard-cell bias-dashboard-cell-left">
-                  <span className="bias-label" data-value={biasData.yours.tempBias}>{biasData.yours.tempBias}</span>
-                </div>
+              <div className="bias-dashboard-row" data-row="temp">
+                <div className="bias-dashboard-cell bias-dashboard-cell-left">色溫偏向</div>
                 <div className="bias-dashboard-cell bias-dashboard-cell-center">
+                  <span className="bias-label" data-value={biasData.yours.tempBias}>{biasData.yours.tempBias}</span>
+                  <span className="bias-arrow" aria-hidden> → </span>
+                  <span className="bias-label" data-value={biasData.reference.tempBias}>{biasData.reference.tempBias}</span>
+                </div>
+                <div className="bias-dashboard-cell bias-dashboard-cell-right">
                   <p className="bias-diff-text">
                     {biasData.yours.tempBias === biasData.reference.tempBias ? "色溫傾向一致" : `參考照片${biasData.reference.tempBias}`}
                   </p>
                 </div>
-                <div className="bias-dashboard-cell bias-dashboard-cell-right">
-                  <span className="bias-label" data-value={biasData.reference.tempBias}>{biasData.reference.tempBias}</span>
-                </div>
               </div>
-              <div className="bias-dashboard-row">
-                <div className="bias-dashboard-cell bias-dashboard-cell-left">
-                  <span className="bias-label" data-value={biasData.yours.channelBias}>{biasData.yours.channelBias}</span>
-                </div>
+              <div className="bias-dashboard-row" data-row="channel">
+                <div className="bias-dashboard-cell bias-dashboard-cell-left">色彩通道偏向</div>
                 <div className="bias-dashboard-cell bias-dashboard-cell-center">
+                  <span className="bias-label" data-value={biasData.yours.channelBias}>{biasData.yours.channelBias}</span>
+                  <span className="bias-arrow" aria-hidden> → </span>
+                  <span className="bias-label" data-value={biasData.reference.channelBias}>{biasData.reference.channelBias}</span>
+                </div>
+                <div className="bias-dashboard-cell bias-dashboard-cell-right">
                   <p className="bias-diff-text">
                     {biasData.yours.channelBias === biasData.reference.channelBias ? "色彩通道傾向一致" : `參考照片${biasData.reference.channelBias}`}
                   </p>
-                </div>
-                <div className="bias-dashboard-cell bias-dashboard-cell-right">
-                  <span className="bias-label" data-value={biasData.reference.channelBias}>{biasData.reference.channelBias}</span>
                 </div>
               </div>
             </div>

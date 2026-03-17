@@ -7,6 +7,13 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 480px) {
+  #root {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

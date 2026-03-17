@@ -82,6 +82,8 @@
   margin-top: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(61, 74, 61, 0.08);
+  overflow: visible;
+  touch-action: pan-y;
 }
 
 .result-title {
@@ -161,6 +163,8 @@
   border: 1px solid var(--color-border-line, #e5e7eb);
   border-radius: 12px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  overflow: visible;
+  touch-action: pan-y;
 }
 .manual-params-card.rgb-params-card {
   margin-top: 1rem;
@@ -202,12 +206,16 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow: visible;
+  touch-action: pan-y;
 }
 .manual-param-row {
   display: grid;
   grid-template-columns: 120px 1fr 72px;
   align-items: center;
   gap: 1rem;
+  touch-action: pan-x;
+  overflow: visible;
 }
 .manual-param-label {
   font-size: 0.875rem;
@@ -222,6 +230,8 @@
   background: var(--color-bg-tertiary, #f0eeea);
   border-radius: 4px;
   outline: none;
+  touch-action: pan-x;
+  cursor: pointer;
 }
 .manual-param-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -523,6 +533,11 @@ canvas.manual-params-preview-img {
 .bias-label[data-value="低對比"] { background: #e8e8e8; color: #4a4a4a; }
 .bias-label[data-value="高對比"] { background: #d4d0c8; color: #2d2a26; }
 .bias-dashboard-single .bias-dashboard-cell-center { gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+.bias-arrow {
+  color: var(--color-text-tertiary);
+  font-size: 0.75em;
+  margin: 0 2px;
+}
 /* 調色分析：偏向分析區塊（在顏色分佈直方圖上方）*/
 .bias-analysis-block { margin-top: 1.5rem; }
 .bias-style-desc {
@@ -789,5 +804,192 @@ canvas.manual-params-preview-img {
 
 .photo-thumb-4 {
   background: linear-gradient(135deg, #BDC0BA, #AAD45D);
+}
+
+/* 640px 以下：偏向分析表格卡片式排列 */
+@media (max-width: 640px) {
+  .bias-dashboard-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .bias-dashboard-row.bias-dashboard-header {
+    display: none;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 2px;
+    padding: 10px 12px;
+    background: var(--color-pure-white, #ffffff) !important;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-primary) !important;
+    align-items: start;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-left {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-secondary) !important;
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-center .bias-label {
+    background: var(--color-light-matcha, #e8f0e8) !important;
+    color: var(--color-text-primary, #2d3a2d) !important;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-center {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-right {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.68rem;
+    color: var(--color-text-tertiary) !important;
+    line-height: 1.4;
+  }
+
+  .bias-label {
+    font-size: 0.72rem !important;
+    padding: 2px 8px !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* 手機版調色參數分析兩欄 */
+@media (max-width: 640px) {
+  .param-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .param-item {
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    min-height: unset !important;
+  }
+
+  .param-label {
+    font-size: 0.75rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .param-value {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+  }
+
+  .tone-params .param-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* 手機版手動調整參數滑桿 */
+@media (max-width: 640px) {
+  .manual-params-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .manual-param-row {
+    display: grid !important;
+    grid-template-columns: 4rem 1fr 2.8rem !important;
+    grid-template-rows: auto auto;
+    column-gap: 6px !important;
+    row-gap: 0;
+    align-items: center;
+    touch-action: pan-x;
+    overflow: visible;
+  }
+
+  .manual-param-label {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 0.72rem !important;
+    white-space: nowrap !important;
+  }
+
+  .manual-param-slider {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100% !important;
+    height: 3px !important;
+    touch-action: pan-x !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    cursor: pointer;
+  }
+
+  .manual-param-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+  }
+
+  .manual-param-slider::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+  }
+
+  .manual-param-value {
+    grid-column: 3;
+    grid-row: 1;
+    font-size: 0.72rem !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+
+  .manual-params-card {
+    padding: 14px 12px !important;
+    overflow: visible !important;
+  }
+}
+
+/* 480px 以下：調色滑桿延續 640px 設定（16px thumb、4rem 1fr 2.8rem） */
+@media (max-width: 480px) {
+  .manual-param-row {
+    grid-template-columns: 4rem 1fr 2.8rem !important;
+  }
+
+  .manual-param-slider::-webkit-slider-thumb {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .manual-param-slider::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .manual-param-slider.slider-channel-r::-webkit-slider-thumb,
+  .manual-param-slider.slider-channel-r::-moz-range-thumb,
+  .manual-param-slider.slider-channel-g::-webkit-slider-thumb,
+  .manual-param-slider.slider-channel-g::-moz-range-thumb,
+  .manual-param-slider.slider-channel-b::-webkit-slider-thumb,
+  .manual-param-slider.slider-channel-b::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+  }
 }
 

@@ -1,0 +1,18 @@
+/* ==========================================================================
+   PSA 設計 Tokens - 與 index.css :root 之 --psa-* 對齊（功能頁額外覆寫）
+   灰階＋霧藍灰點綴、圓角與陰影一致
+   ========================================================================== */
+
+/* 僅在功能頁 (data-psa-func) 時覆蓋／補強 */
+.app-container[data-psa-func="true"] {
+  --psa-radius: 14px;
+  --psa-radius-sm: 10px;
+  --psa-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --psa-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --psa-border: rgba(0, 0, 0, 0.08);
+  --psa-border-strong: rgba(0, 0, 0, 0.12);
+  --psa-section-gap: 1.5rem;
+  /* 長文區塊行高（與全站 prose 呼應） */
+  --psa-prose-line: 1.75;
+  --psa-prose-max: 56rem;
+}

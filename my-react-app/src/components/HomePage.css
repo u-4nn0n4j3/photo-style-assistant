@@ -1,0 +1,351 @@
+.homepage-psa[data-psa-home="true"] {
+  min-height: 100dvh;
+  background: #F5F2EE;
+  display: flex;
+  align-items: stretch;
+}
+
+.homepage-psa__shell {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #111;
+  border-right: 1px solid #111;
+}
+
+.homepage-psa__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 48px;
+  border-bottom: 1px solid #111;
+}
+
+.homepage-psa__nav-brand {
+  font-family: "Shippori Mincho", serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #111;
+}
+
+.homepage-psa__nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.homepage-psa__nav-links span {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: #111;
+  opacity: 0.35;
+  text-transform: uppercase;
+}
+
+/* 全寬低飽和漸層線（--psa-accent → --psa-muted，不搶主標） */
+.homepage-psa__hero-rule {
+  height: 2px;
+  width: 100%;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--psa-accent) 28%,
+    var(--psa-muted) 62%,
+    transparent 100%
+  );
+  opacity: 0.42;
+}
+
+.homepage-psa__title-accent {
+  width: min(5.5rem, 40vw);
+  height: 3px;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--psa-accent), var(--psa-muted));
+  opacity: 0.78;
+}
+
+.homepage-psa__hero {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  flex: 1;
+  min-height: calc(100dvh - 65px);
+}
+
+.homepage-psa__title-block {
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #111;
+}
+
+.homepage-psa__eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: #111;
+  opacity: 0.3;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.homepage-psa__title-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+.homepage-psa__fstop-rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 280px;
+  gap: 0;
+  padding: 4px 0;
+  border-left: 1px solid rgba(0,0,0,0.2);
+  padding-left: 12px;
+}
+
+.homepage-psa__fstop-rail span {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #111;
+  opacity: 0.22;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.homepage-psa__title {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  font-size: clamp(5rem, 9vw, 8.5rem);
+  font-weight: 700;
+  color: #111;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.homepage-psa__title-em {
+  font-style: normal;
+  color: #7A5C1E;
+  position: relative;
+  display: inline-block;
+}
+
+.homepage-psa__title-foot {
+  border-top: 1px solid rgba(0,0,0,0.12);
+  padding-top: 20px;
+}
+
+.homepage-psa__shutter {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #111;
+  opacity: 0.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.homepage-psa__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 56px;
+  padding: 56px 40px;
+}
+
+.homepage-psa__ev-meter {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.homepage-psa__ev-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #111;
+  opacity: 0.3;
+  text-transform: uppercase;
+  padding-top: 2px;
+}
+
+.homepage-psa__ev-track {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex: 1;
+}
+
+.homepage-psa__ev-tick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.homepage-psa__ev-line {
+  width: 1px;
+  height: 12px;
+  background: #111;
+  opacity: 0.2;
+}
+
+.homepage-psa__ev-tick--center .homepage-psa__ev-line {
+  height: 20px;
+  opacity: 0.5;
+}
+
+.homepage-psa__ev-tick span {
+  font-size: 9px;
+  color: #111;
+  opacity: 0.25;
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+.homepage-psa__ev-tick--center span {
+  opacity: 0.5;
+}
+
+.homepage-psa__side-desc {
+  font-size: 13px;
+  color: #111;
+  opacity: 0.45;
+  line-height: 2.1;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.homepage-psa__entries {
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage-psa__entry {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 0;
+  border-top: 1px solid #111;
+  cursor: pointer;
+  transition: background 0.18s ease, padding 0.18s ease;
+  position: relative;
+}
+
+.homepage-psa__entry:last-child {
+  border-bottom: 1px solid #111;
+}
+
+.homepage-psa__entry:hover {
+  background: #111;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
+.homepage-psa__entry:hover .homepage-psa__entry-num,
+.homepage-psa__entry:hover .homepage-psa__entry-title,
+.homepage-psa__entry:hover .homepage-psa__entry-desc,
+.homepage-psa__entry:hover .homepage-psa__entry-icon {
+  color: #fff;
+  opacity: 1;
+}
+
+.homepage-psa__entry:focus-visible {
+  outline: 2px solid var(--psa-accent);
+  outline-offset: 4px;
+}
+
+.homepage-psa__entry-num {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #111;
+  opacity: 0.25;
+  transition: color 0.18s, opacity 0.18s;
+}
+
+.homepage-psa__entry-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.homepage-psa__entry-icon {
+  color: #111;
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: color 0.18s, opacity 0.18s;
+  display: flex;
+  align-items: center;
+}
+
+.homepage-psa__entry-title {
+  font-family: "Shippori Mincho", serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 5px 0;
+  letter-spacing: 0.02em;
+  transition: color 0.18s;
+}
+
+.homepage-psa__entry-desc {
+  font-size: 11px;
+  color: #111;
+  opacity: 0.4;
+  margin: 0;
+  letter-spacing: 0.06em;
+  transition: color 0.18s, opacity 0.18s;
+}
+
+.homepage-psa__side-foot {
+  border-top: 1px solid rgba(0,0,0,0.12);
+  padding-top: 20px;
+}
+
+.homepage-psa__side-note {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #111;
+  opacity: 0.25;
+  text-transform: uppercase;
+}
+
+.homepage-psa__hero-bg { display: none; }
+
+@media (max-width: 900px) {
+  .homepage-psa__hero {
+    grid-template-columns: 1fr;
+  }
+  .homepage-psa__title-block {
+    border-right: none;
+    border-bottom: 1px solid #111;
+    min-height: 55vh;
+  }
+  .homepage-psa__title {
+    font-size: clamp(4rem, 13vw, 6rem);
+  }
+  .homepage-psa__fstop-rail {
+    min-height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-psa__nav {
+    padding: 20px 24px;
+  }
+  .homepage-psa__title-block,
+  .homepage-psa__side {
+    padding: 40px 24px;
+  }
+  .homepage-psa__shell {
+    border: none;
+  }
+}

@@ -1,0 +1,2704 @@
+/* 模式選擇器 - 模式卡片 */
+.analysis-mode-selector.mode-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 40px;
+}
+
+.analysis-mode-selector .mode-btn.mode-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+  border: none;
+  border-right: 1px solid #1a1a1a;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+  box-shadow: none;
+  transform: none;
+  position: relative;
+}
+
+.analysis-mode-selector .mode-btn.mode-card:last-child {
+  border-right: none;
+}
+
+.analysis-mode-selector .mode-btn.mode-card:hover {
+  background: rgba(0,0,0,0.03);
+  transform: none;
+  box-shadow: none;
+}
+
+.analysis-mode-selector .mode-btn.mode-card.active {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  box-shadow: none;
+}
+
+.analysis-mode-selector .mode-btn.mode-card .mode-text {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #1a1a1a;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.analysis-mode-selector .mode-btn.mode-card.active .mode-text {
+  color: #F5F2EE;
+}
+
+.analysis-mode-selector .mode-btn.mode-card .mode-desc {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #888;
+  display: block;
+}
+
+.analysis-mode-selector .mode-btn.mode-card.active .mode-desc {
+  color: rgba(245,242,238,0.6);
+}
+
+.analysis-mode-selector .mode-btn.mode-card .mode-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.35;
+  font-size: 1.5rem;
+}
+
+.analysis-mode-selector .mode-btn.mode-card.active .mode-icon {
+  opacity: 0.6;
+  filter: invert(1);
+}
+
+.mode-icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.mode-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.mode-text {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--psa-ink);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.mode-desc {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  display: block;
+}
+
+/* ============================================================
+   對比分析 — 「差距數字化」技術規格感
+   ============================================================ */
+
+.analysis-result-wrapper {
+  margin-top: 48px;
+}
+
+/* 重新上傳並分析：從連結樣式改為稜角按鈕 */
+.analysis-result-wrapper > .flex > button,
+.analysis-result-wrapper .flex.justify-start > button {
+  display: inline-block;
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  border-radius: 0 !important;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+}
+
+.analysis-result-wrapper > .flex > button:hover,
+.analysis-result-wrapper .flex.justify-start > button:hover {
+  background: #1a1a1a;
+  color: #f5f2ee;
+}
+
+/* 【9】對比分析外層 */
+.analysis-comparison-card {
+  border: none !important;
+  border-top: 3px solid #1a1a1a !important;
+  padding-top: 32px !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 照片對比分析：標題左側加短橫線裝飾 */
+.analysis-comparison-title {
+  display: flex !important;
+  align-items: baseline;
+  gap: 12px;
+  font-size: max(10px, 0.55rem) !important;
+  letter-spacing: 0.3em !important;
+  color: #888 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 48px !important;
+  font-weight: 400 !important;
+}
+
+.analysis-comparison-title::before {
+  content: "";
+  width: 20px;
+  height: 1px;
+  background: #1a1a1a;
+  flex-shrink: 0;
+}
+
+/* 對比分析上傳卡片：去掉 shadow，加強邊框 */
+.photo-upload-zone,
+.reference-upload-zone {
+  border: 1px solid #1a1a1a !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 24px !important;
+  position: relative;
+}
+
+/* 上傳區標題：和標籤裝飾保持距離 */
+.upload-section-title {
+  margin-top: 20px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  color: #1a1a1a !important;
+  padding-left: 0 !important;
+}
+
+.upload-section-description {
+  font-size: 0.78rem !important;
+  color: #888 !important;
+  margin-top: 4px !important;
+  padding-left: 0 !important;
+}
+
+/* 【4】四個對比項目：左數字區 + 刻度尺 + 右說明 */
+.analysis-comparison-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: none;
+  margin-bottom: 56px;
+}
+
+.comparison-item-card {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  grid-template-rows: auto;
+  gap: 0;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid #e8e4de;
+  border-radius: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  align-items: stretch;
+}
+
+.comparison-item-card .comparison-title {
+  grid-column: 1;
+  align-self: start;
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  color: #888;
+  text-transform: uppercase;
+  margin: 0 0 16px 0;
+  font-weight: 400;
+  display: block;
+}
+
+.comparison-item-card .comparison-bars {
+  grid-column: 1;
+  align-self: start;
+  padding: 32px 40px 32px 0;
+  border-right: 1px solid #e8e4de;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.comparison-item-card .bar-item {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.comparison-item-card .bar-label {
+  font-size: 0.62rem;
+  color: #bbb;
+  width: 56px;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.comparison-item-card .bar-container {
+  display: none;
+}
+
+.comparison-item-card .bar-item:first-child > span:nth-child(3) {
+  font-size: 3rem !important;
+  font-weight: 200 !important;
+  color: #1a1a1a !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums !important;
+  display: block !important;
+  margin-top: 4px;
+}
+
+.comparison-item-card .bar-item:last-child > span:nth-child(3) {
+  font-size: 2rem !important;
+  font-weight: 200 !important;
+  color: #999 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums !important;
+  display: block !important;
+  margin-top: 4px;
+}
+
+/* 刻度尺裝飾（非色溫） */
+.comparison-item-card .comparison-bars::after {
+  content: "0 ——————————————— 50 ——————————————— 100";
+  display: block !important;
+  font-size: 0.45rem;
+  letter-spacing: 0.05em;
+  color: #ccc;
+  margin-top: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.comparison-item-card .comparison-result {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  padding: 32px 0 32px 32px;
+  border: none;
+  border-radius: 0 !important;
+  font-size: 0.82rem;
+  color: #1a1a1a;
+  line-height: 1.7;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  background: transparent;
+}
+
+.color-temp-item .bar-item:first-child > span.temp-value {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.color-temp-item .bar-item:last-child > span.temp-value {
+  font-size: 1rem;
+  color: #999;
+  letter-spacing: 0.01em;
+}
+
+/* 色溫不顯示刻度尺 */
+.color-temp-item .comparison-bars::after {
+  display: none !important;
+}
+
+.comparison-item-card.color-temp-item .bar-item:first-child > span.temp-value {
+  font-size: 1.3rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.comparison-item-card.color-temp-item .bar-item:last-child > span.temp-value {
+  font-size: 1rem;
+  color: #999;
+  letter-spacing: 0.01em;
+}
+
+/* 隱藏進度條時仍保留 bar-f 供無障礙／未套用 .comparison-item-card 之備援 */
+.bar-container {
+  flex: 1;
+  min-width: 0;
+  height: 1px;
+  background: #e0dcd6;
+  position: relative;
+  overflow: visible;
+}
+
+.bar-f {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: width 0.6s ease;
+}
+
+.bar-f.yours {
+  background: #1a1a1a;
+  height: 3px;
+  top: -1px;
+}
+
+.bar-f.ref {
+  background: #bbb;
+  height: 1px;
+  top: 0;
+}
+
+.bar-f.warn {
+  background: #c05020;
+  height: 1px;
+  top: 0;
+}
+
+.color-temp-item .comparison-bars {
+  gap: 8px;
+}
+
+.temp-value {
+  font-size: 0.85rem;
+  color: #1a1a1a;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* 【3】【5】偏向分析（對比版） */
+.bias-dashboard {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid #e8e4de;
+  background: transparent;
+}
+
+.bias-dashboard-title {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.bias-dashboard-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: none;
+}
+
+.bias-dashboard-row {
+  display: grid;
+  grid-template-columns: 120px 1fr 200px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0ece6;
+  gap: 0;
+  min-height: auto;
+}
+
+.bias-dashboard-row:last-child {
+  border-bottom: none;
+}
+
+.bias-dashboard-header {
+  padding: 0 0 12px 0;
+}
+
+.bias-dashboard-header .bias-dashboard-cell {
+  font-size: 0.45rem;
+  letter-spacing: 0.3em;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+.bias-dashboard-cell {
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+  color: #1a1a1a;
+}
+
+.bias-dashboard-cell-left {
+  justify-content: flex-start;
+  font-size: 0.78rem;
+  color: #888;
+  letter-spacing: 0.06em;
+}
+
+.bias-dashboard-cell-center {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.bias-dashboard-cell-right {
+  justify-content: flex-end;
+  font-size: 0.78rem;
+  color: #888;
+  text-align: right;
+}
+
+.bias-label {
+  display: inline-block;
+  padding: 6px 16px !important;
+  font-size: 0.82rem !important;
+  font-weight: 400;
+  border-radius: 0;
+  letter-spacing: 0.06em;
+}
+
+.bias-label[data-value="偏暗"] { background: #1a1a1a; color: #F5F2EE; }
+.bias-label[data-value="偏亮"] { background: #f0ebe0; color: #5c4d00; }
+.bias-label[data-value="正常"] { background: #e8e4de; color: #1a1a1a; }
+.bias-label[data-value="偏暖"] { background: #e8d0b0; color: #5c3000; }
+.bias-label[data-value="偏冷"] { background: #c0d4e8; color: #0d2d5c; }
+.bias-label[data-value="中性"] { background: #e8e4de; color: #1a1a1a; }
+.bias-label[data-value="偏紅"] { background: #e8c0c0; color: #6b2020; }
+.bias-label[data-value="偏綠"] { background: #c8e0c8; color: #1a4d1a; }
+.bias-label[data-value="偏藍"] { background: #c0c8e8; color: #1a2d6b; }
+.bias-label[data-value="均衡"] { background: #e8e4de; color: #1a1a1a; }
+.bias-label[data-value="低對比"] { background: #e8e4de; color: #888; }
+.bias-label[data-value="高對比"] { background: #1a1a1a; color: #F5F2EE; }
+
+/* 強制所有 bias-label 直角 */
+.bias-label,
+[class*="bias-label"] {
+  border-radius: 0 !important;
+}
+
+.bias-arrow {
+  font-size: 0.78rem;
+  color: #ccc;
+}
+
+.bias-diff-text {
+  font-size: 0.78rem !important;
+  color: #888;
+  margin: 0;
+}
+
+/* 【4】顏色分佈直方圖 */
+.compare-histogram-block {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #e8e4de;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  background: transparent;
+}
+
+.compare-histogram-title {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.compare-histogram-canvas-wrap {
+  border: none;
+  border-top: 1px solid #e8e4de;
+  border-bottom: 1px solid #e8e4de;
+  border-radius: 0;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+}
+
+.compare-histogram-canvas {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background: #f8f6f2;
+}
+
+.compare-histogram-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.compare-histogram-legend .legend-item {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #888;
+}
+
+/* 【6】分析模式區塊 */
+.analysis-mode-section {
+  margin-top: 56px;
+  padding: 32px;
+  background: transparent;
+  border: none;
+  border-left: 3px solid #1a1a1a;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.analysis-mode-title {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.analysis-mode-title svg {
+  opacity: 0.4;
+  filter: none;
+}
+
+.mode-content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid #e8e4de;
+  margin-bottom: 20px;
+}
+
+.mode-data-item {
+  padding: 20px 20px;
+  border-right: 1px solid #e8e4de;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-data-item:last-child {
+  border-right: none;
+}
+
+.mode-label {
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+.mode-value {
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.mode-value.primary {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.mode-description-box {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.8;
+  border: none;
+  padding: 0;
+  margin-top: 0;
+  background: transparent;
+}
+
+/* 【7】Lightroom 建議 */
+.lightroom-suggestions-card {
+  margin-top: 56px;
+  border: none !important;
+  border-top: 3px solid #1a1a1a !important;
+  padding-top: 32px;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.lightroom-suggestions-title {
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.lightroom-adjustment-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid #1a1a1a;
+  margin-bottom: 24px;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.lightroom-adjustment-item {
+  padding: 28px 24px;
+  border-right: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.lightroom-adjustment-item:nth-child(3n) {
+  border-right: none !important;
+}
+
+.lightroom-adjustment-item:nth-last-child(-n+3) {
+  border-bottom: none !important;
+}
+
+.lightroom-adjustment-name {
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  color: #888;
+  text-transform: uppercase;
+  margin: 0;
+  display: block;
+  font-weight: 400;
+}
+
+.lightroom-adjustment-value {
+  font-size: 2.5rem !important;
+  font-weight: 200 !important;
+  color: #1a1a1a !important;
+  letter-spacing: -0.03em !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  display: block !important;
+  border-radius: 0 !important;
+}
+
+.lightroom-hint-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: transparent;
+  border-left: 3px solid #c8c4be;
+  border-radius: 0;
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.lightroom-copy-params-wrap {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+
+.lightroom-copy-params-btn {
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  border-radius: 0;
+  padding: 10px 24px;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lightroom-copy-params-btn:hover {
+  background: #1a1a1a;
+  color: #F5F2EE;
+}
+
+/* 【7】調整預覽 */
+.adjustment-preview-section {
+  margin-top: 48px;
+  border-top: 1px solid #e8e4de;
+  padding-top: 32px;
+  background: transparent;
+}
+
+.adjustment-preview-title {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.adjustment-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: #1a1a1a;
+}
+
+.adjustment-preview-item {
+  background: #f5f2ee;
+  display: flex;
+  flex-direction: column;
+}
+
+.adjustment-preview-img-wrap {
+  width: 100%;
+  aspect-ratio: unset;
+  overflow: hidden;
+  background: #1a1a1a;
+  border-radius: 0 !important;
+}
+
+.adjustment-preview-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 0 !important;
+  image-rendering: auto;
+}
+
+.adjustment-preview-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: #888;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 10px 0 8px;
+  text-align: center;
+}
+
+.adjustment-preview-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px;
+  color: #888;
+  font-size: 0.82rem;
+}
+
+.same-image-notice {
+  padding: 14px 16px;
+  border-left: 3px solid #c8c4be;
+  background: transparent;
+  font-size: 0.82rem;
+  color: #888;
+  border-radius: 0;
+}
+
+.lighting-effect-warning {
+  padding: 16px 20px;
+  background: #1a1a1a;
+  color: #F5F2EE;
+  border-radius: 0;
+  margin-top: 16px;
+}
+
+.lighting-effect-warning-title {
+  font-size: 0.78rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #F5F2EE;
+}
+
+/* ============================================================
+   調色分析 — 「解碼底片」技術規格頁
+   ============================================================ */
+
+.reverse-analysis-results {
+  margin-top: 32px;
+}
+
+/* 調色分析：外層底片感定位 */
+.reverse-engineering-section {
+  position: relative;
+}
+
+/* 【8】上傳區 */
+.upload-single-photo h3 {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 8px;
+  border-top: 3px solid #1a1a1a;
+  padding-top: 24px;
+}
+
+.upload-description {
+  font-size: 0.78rem;
+  color: #888;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+
+.upload-area {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 80px 24px;
+  cursor: pointer;
+  min-height: 240px;
+  border-radius: 0;
+  background: #1a1a1a;
+  border: none;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.upload-placeholder:hover {
+  background: #2a2a2a;
+}
+
+.upload-placeholder::before {
+  content: none;
+}
+
+.upload-placeholder::after {
+  content: "UPLOAD";
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  font-size: 0.45rem;
+  letter-spacing: 0.4em;
+  color: rgba(245,242,238,0.2);
+}
+
+.upload-text {
+  font-size: 0.78rem;
+  color: rgba(245,242,238,0.6);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.upload-hint {
+  font-size: 0.6rem;
+  color: rgba(245,242,238,0.3);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* 【1】照片預覽（米白底） */
+.analyzed-photo-preview {
+  position: relative;
+  background: #f5f2ee;
+  border-top: 3px solid #1a1a1a;
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.analyzed-photo-preview::before,
+.analyzed-photo-preview::after {
+  display: none;
+}
+
+.analyzed-photo-preview img {
+  width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 0 !important;
+  background: #f5f2ee;
+  padding: 0;
+  box-sizing: border-box;
+  filter: none;
+}
+
+.photo-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  background: transparent;
+  font-size: 0.65rem;
+  color: #888;
+  letter-spacing: 0.08em;
+  border-top: 1px solid #e8e4de;
+}
+
+/* 【10】調色參數分析標題 */
+.color-analysis-results {
+  background: transparent;
+  padding: 0;
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.result-title {
+  font-size: 0.5rem;
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 48px 0 32px;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* 【11】基礎調整 */
+.basic-params {
+  margin-bottom: 0;
+  border-top: 3px solid #1a1a1a;
+  padding-top: 24px;
+}
+
+.basic-params h4,
+.tone-params h4,
+.color-distribution h4 {
+  font-size: 0.48rem;
+  letter-spacing: 0.3em;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.param-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid #1a1a1a;
+  border-radius: 0 !important;
+}
+
+.param-item {
+  padding: 24px 20px;
+  border-right: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.param-item:nth-child(3n) { border-right: none; }
+.param-item:nth-last-child(-n+3) { border-bottom: none; }
+
+.param-label {
+  font-size: 0.48rem;
+  letter-spacing: 0.25em;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.param-value {
+  font-size: 2.2rem !important;
+  font-weight: 200 !important;
+  color: #1a1a1a !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1 !important;
+}
+
+.param-bar {
+  display: none;
+}
+
+.param-fill {
+  height: 100%;
+  background: #1a1a1a;
+  transition: width 0.5s ease;
+}
+
+.param-fill.negative { background: #888; }
+
+/* 【12】色調曲線 */
+.tone-params {
+  margin-bottom: 0;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 24px;
+  margin-top: 48px;
+}
+
+.tone-params .param-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+.tone-params .param-item:nth-child(2n) {
+  border-right: none !important;
+}
+
+.tone-params .param-item:nth-child(3n) {
+  border-right: 1px solid #1a1a1a !important;
+}
+
+.tone-params .param-item:nth-last-child(-n+2) {
+  border-bottom: none !important;
+}
+
+.tone-params .param-item:nth-last-child(-n+3) {
+  border-bottom: 1px solid #1a1a1a !important;
+}
+
+/* 【2】風格識別：左右雙欄 */
+.style-detection {
+  border-top: 3px solid #1a1a1a;
+  padding: 48px 0 0 0;
+  background: transparent;
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 48px;
+  align-items: start;
+}
+
+.style-detection h4 {
+  font-size: max(13px, 0.85rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #888 !important;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 20px;
+  grid-column: 1 / -1;
+}
+
+.style-name {
+  grid-column: 1;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 200;
+  color: #1a1a1a;
+  letter-spacing: -0.03em;
+  margin: 0 0 24px 0;
+  line-height: 1.05;
+  word-break: keep-all;
+}
+
+.style-desc {
+  grid-column: 2;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.9;
+  border-left: 2px solid #c8c4be;
+  padding-left: 20px;
+  margin: 0;
+  align-self: start;
+  padding-top: 8px;
+}
+
+.color-signature {
+  grid-column: 1 / -1;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid #e8e4de;
+}
+
+.color-signature h4 {
+  font-size: max(13px, 0.85rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #888 !important;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+
+.color-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.color-tag {
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  padding: 12px 28px;
+  font-size: 0.88rem;
+  color: #1a1a1a;
+  border-radius: 0;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  letter-spacing: 0.08em;
+}
+
+/* 【3】偏向分析（調色版） */
+.bias-analysis-block {
+  margin-top: 48px;
+  border-top: 1px solid #e8e4de;
+  padding-top: 32px;
+}
+
+.bias-style-desc {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.8;
+  border-left: 3px solid #1a1a1a;
+  padding-left: 16px;
+  background: transparent;
+  border-radius: 0;
+  margin-bottom: 32px;
+}
+
+.bias-dashboard-single .bias-dashboard-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 180px;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0ece6;
+  gap: 0;
+}
+
+.bias-dashboard-single .bias-dashboard-cell-left {
+  font-size: 0.75rem;
+  color: #888;
+  letter-spacing: 0.08em;
+}
+
+.bias-dashboard-single .bias-dashboard-cell-center .bias-label,
+.bias-dashboard-single .bias-dashboard-cell-center .bias-arrow {
+  display: none !important;
+}
+
+.bias-dashboard-single .bias-dashboard-cell-center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 0 20px !important;
+}
+
+/* 刻度條（bias-dashboard-single） */
+.bias-scale-wrap {
+  width: 100%;
+}
+
+.bias-scale-track {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: #c8c4be;
+  margin: 6px 0 4px;
+}
+
+.bias-scale-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 7px;
+  height: 7px;
+  background: #1a1a1a;
+  border-radius: 50% !important;
+  transition: left 0.3s ease;
+}
+
+.bias-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.44rem;
+  letter-spacing: 0.1em;
+  color: #bbb;
+}
+
+.bias-dashboard-single .bias-dashboard-cell-right {
+  font-size: 0.78rem;
+  color: #888;
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+/* 顏色分佈 */
+.color-distribution {
+  margin-top: 40px;
+  border-top: 1px solid #c8c4be;
+  padding-top: 24px;
+}
+
+.color-histogram-canvas-wrap {
+  border: 1px solid #e8e4de;
+  border-radius: 0;
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+#colorHistogram {
+  width: 100%;
+  height: 200px;
+  display: block;
+}
+
+.histogram-legend {
+  display: flex;
+  gap: 8px 24px;
+  margin-top: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #888;
+  padding-left: 16px;
+  position: relative;
+  letter-spacing: 0.05em;
+}
+
+.legend-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+}
+
+.legend-item.red::before { background: rgb(220,80,80); }
+.legend-item.green::before { background: rgb(80,180,80); }
+.legend-item.blue::before { background: rgb(80,120,220); }
+
+.compare-legend-red::before { background: rgba(220,80,80,0.9); border-radius: 0; }
+.compare-legend-green::before { background: rgba(80,180,80,0.9); border-radius: 0; }
+.compare-legend-blue::before { background: rgba(80,120,220,0.9); border-radius: 0; }
+.compare-legend-solid::before { width: 16px; height: 2px; background: #1a1a1a; }
+.compare-legend-dashed::before { width: 16px; height: 0; border-bottom: 2px dashed #888; background: none; }
+
+/* 【14】手動調整參數 */
+.manual-params-card {
+  margin-top: 48px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-top: 1px solid #e8e4de;
+  padding-top: 32px;
+  border-radius: 0;
+}
+
+.manual-params-card.rgb-params-card {
+  border-top: 1px solid #e8e4de;
+  margin-top: 32px;
+}
+
+.manual-params-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.manual-params-card-title {
+  font-size: 0.48rem;
+  letter-spacing: 0.3em;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0;
+}
+
+.manual-params-card-desc {
+  font-size: 0.72rem;
+  color: #aaa;
+  margin: 8px 0 0 0;
+  line-height: 1.5;
+}
+
+.manual-params-reset-btn {
+  padding: 6px 14px;
+  font-size: 0.72rem;
+  color: #888;
+  background: transparent;
+  border: 1px solid #c8c4be;
+  border-radius: 0;
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  transition: background 0.15s, color 0.15s;
+}
+
+.manual-params-reset-btn:hover {
+  background: #1a1a1a;
+  color: #F5F2EE;
+  border-color: #1a1a1a;
+}
+
+.manual-params-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.manual-param-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 56px;
+  align-items: center;
+  gap: 16px;
+}
+
+.manual-param-label {
+  font-size: 0.72rem;
+  color: #888;
+  letter-spacing: 0.05em;
+}
+
+.manual-param-slider {
+  width: 100%;
+  height: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e8e4de;
+  border-radius: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.manual-param-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  background: #1a1a1a;
+  border: none;
+  cursor: pointer;
+}
+
+.manual-param-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  background: #1a1a1a;
+  border: none;
+  cursor: pointer;
+}
+
+.manual-param-slider.slider-channel-r::-webkit-slider-thumb { background: #c44; }
+.manual-param-slider.slider-channel-r::-moz-range-thumb { background: #c44; }
+.manual-param-slider.slider-channel-g::-webkit-slider-thumb { background: #4a4; }
+.manual-param-slider.slider-channel-g::-moz-range-thumb { background: #4a4; }
+.manual-param-slider.slider-channel-b::-webkit-slider-thumb { background: #44c; }
+.manual-param-slider.slider-channel-b::-moz-range-thumb { background: #44c; }
+
+.manual-param-value {
+  font-size: 0.78rem;
+  color: #1a1a1a;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.manual-param-value.rgb-value-pos { color: #1a1a1a; }
+.manual-param-value.rgb-value-neg { color: #888; }
+.manual-param-value.rgb-value-zero { color: #ccc; }
+
+.manual-params-apply-wrap { margin-top: 24px; }
+
+/* 【15】套用並預覽按鈕 */
+.manual-params-apply-btn {
+  width: 100%;
+  padding: 18px;
+  background: #1a1a1a;
+  color: #f5f2ee;
+  border: none;
+  border-radius: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-top: 48px;
+}
+
+.manual-params-apply-btn:hover { background: #333; }
+
+/* 【16】套用預覽圖 */
+.manual-params-preview-block {
+  border-top: none;
+  margin-top: 2px;
+  border-radius: 0 !important;
+  padding-top: 0;
+}
+
+.manual-params-preview-pair {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: #1a1a1a;
+  margin-top: 0 !important;
+}
+
+.manual-params-preview-cell {
+  background: #f5f2ee;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.manual-params-preview-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0 !important;
+  display: block;
+  image-rendering: auto;
+  box-shadow: none;
+}
+
+.manual-params-preview-label {
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  color: #888;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 10px 0 8px;
+  text-align: center;
+}
+
+/* 【17】底部操作按鈕 */
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 48px;
+  border-top: 1px solid #e8e4de;
+  padding-top: 0;
+}
+
+.action-buttons .btn-secondary {
+  padding: 18px;
+  background: transparent;
+  border: 1px solid #1a1a1a;
+  border-right: none;
+  border-radius: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.action-buttons .btn-secondary:hover { background: #f0ede8; }
+
+.action-buttons .btn-primary {
+  padding: 18px;
+  background: #1a1a1a;
+  border: 1px solid #1a1a1a;
+  border-radius: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #f5f2ee;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.action-buttons .btn-primary:hover { background: #333; }
+
+/* Hero Section - 日系極簡 */
+.hero-section {
+  width: 100%;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+  background: var(--psa-rice);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(181, 196, 168, 0.15) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-title {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  color: var(--psa-ink);
+}
+
+.hero-subtitle {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  color: var(--psa-muted);
+}
+
+.hero-description {
+  font-family: "Shippori Mincho", "Noto Serif TC", serif;
+  color: var(--color-text-primary);
+}
+
+/* 太陽 */
+.sun-core {
+  background: radial-gradient(circle, #F5B1AA 0%, #F5B1AA 100%);
+}
+
+.sun-rays,
+.sun-rays .ray,
+.sun-rays [class*="ray"] {
+  background: #F5B1AA;
+}
+
+/* 相機 */
+.camera-body {
+  background: linear-gradient(135deg, #577C8A 0%, #394A58 100%);
+}
+
+.camera-lens {
+  background: radial-gradient(circle, #7EBEAB 0%, #6C9A8E 60%, #577C8A 100%);
+  border: 5px solid #394A58;
+}
+
+.camera-flash {
+  background: #AAD45D;
+}
+
+/* 圖示 */
+.icon-aperture {
+  background: conic-gradient(
+    from 0deg,
+    #77969A 0deg 60deg,
+    transparent 60deg 120deg,
+    #77969A 120deg 180deg,
+    transparent 180deg 240deg,
+    #77969A 240deg 300deg,
+    transparent 300deg 360deg
+  );
+}
+
+.icon-calculator {
+  background: linear-gradient(135deg, #394A58, #577C8A);
+}
+
+.calc-screen {
+  background: #7EBEAB;
+}
+
+.icon-filter {
+  background: linear-gradient(
+    135deg,
+    rgba(57, 74, 88, 0.3),
+    rgba(87, 124, 138, 0.6)
+  );
+  border: 3px solid #77969A;
+}
+
+/* 三腳架 */
+.tripod-head,
+.tripod-leg {
+  background: linear-gradient(180deg, #577C8A, #394A58);
+}
+
+/* 電腦螢幕 */
+.monitor-body {
+  background: linear-gradient(135deg, #394A58, #577C8A);
+  border: 4px solid #475950;
+}
+
+.monitor-screen {
+  background: linear-gradient(135deg, #77969A, #7EBEAB);
+}
+
+.monitor-stand {
+  background: linear-gradient(180deg, #577C8A, #394A58);
+}
+
+/* 柱狀圖 */
+.bar-1 {
+  background: #F5B1AA;
+}
+
+.bar-2 {
+  background: #7EBEAB;
+}
+
+.bar-3 {
+  background: #AAD45D;
+}
+
+.bar-4 {
+  background: #77969A;
+}
+
+/* 色環 */
+.icon-color-wheel {
+  background: conic-gradient(
+    #F5B1AA 0deg,
+    #AAD45D 60deg,
+    #7EBEAB 120deg,
+    #6C9A8E 180deg,
+    #77969A 240deg,
+    #577C8A 300deg,
+    #F5B1AA 360deg
+  );
+  border: 3px solid #BDC0BA;
+}
+
+/* 放大鏡 */
+.magnifier-glass {
+  border: 5px solid #394A58;
+  background: rgba(126, 190, 171, 0.3);
+}
+
+.magnifier-handle {
+  background: #394A58;
+}
+
+/* 折線圖 */
+.icon-line-chart {
+  background:
+    linear-gradient(to bottom, transparent 60%, #C8E3D7 60%),
+    linear-gradient(
+      135deg,
+      transparent 40%,
+      #7EBEAB 40%,
+      #7EBEAB 43%,
+      transparent 43%
+    );
+  border: 2px solid #77969A;
+}
+
+/* 雲朵 */
+.cloud {
+  background: rgba(200, 227, 215, 0.5);
+}
+
+/* 星星 */
+.star {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(126, 190, 171, 0.6);
+}
+
+/* 閃電箭頭 */
+.lightning-arrow {
+  color: #AAD45D;
+  filter: drop-shadow(0 0 20px rgba(170, 212, 93, 0.6));
+}
+
+/* 照片縮圖 */
+.photo-thumb-1 {
+  background: linear-gradient(135deg, #C8E3D7, #7EBEAB);
+}
+
+.photo-thumb-2 {
+  background: linear-gradient(135deg, #77969A, #6C9A8E);
+}
+
+.photo-thumb-3 {
+  background: linear-gradient(135deg, #F5B1AA, #F5B1AA);
+}
+
+.photo-thumb-4 {
+  background: linear-gradient(135deg, #BDC0BA, #AAD45D);
+}
+
+/* 640px 以下：偏向分析表格卡片式排列 */
+@media (max-width: 640px) {
+  .bias-dashboard-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .bias-dashboard-row.bias-dashboard-header {
+    display: none;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) {
+    display: grid;
+    grid-template-columns: 5rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 2px;
+    padding: 10px 12px;
+    background: var(--color-pure-white, #ffffff) !important;
+    border-radius: 8px;
+    border: 1px solid var(--color-border-primary) !important;
+    align-items: start;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-left {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-secondary) !important;
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-center .bias-label {
+    background: var(--psa-surface, #e8e5e0) !important;
+    color: var(--color-text-primary, #2c3138) !important;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-center {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .bias-dashboard-row:not(.bias-dashboard-header) .bias-dashboard-cell-right {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 0.68rem;
+    color: var(--color-text-tertiary) !important;
+    line-height: 1.4;
+  }
+
+  .bias-label {
+    font-size: 0.72rem !important;
+    padding: 2px 8px !important;
+    border-radius: 0 !important;
+  }
+}
+
+/* 手機版調色參數分析兩欄 */
+@media (max-width: 640px) {
+  .param-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0 !important;
+  }
+
+  .param-item {
+    padding: 10px 12px !important;
+    border-radius: 0 !important;
+    min-height: unset !important;
+  }
+
+  .param-item:nth-child(3n) {
+    border-right: none !important;
+  }
+
+  .param-item:nth-last-child(-n+3) {
+    border-bottom: none !important;
+  }
+
+  .param-label {
+    font-size: 0.75rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .param-value {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+  }
+
+  .tone-params .param-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* 手機版手動調整參數滑桿 */
+@media (max-width: 640px) {
+  .manual-params-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .manual-param-row {
+    display: grid !important;
+    grid-template-columns: 4rem 1fr 2.8rem !important;
+    grid-template-rows: auto auto;
+    column-gap: 6px !important;
+    row-gap: 0;
+    align-items: center;
+    touch-action: pan-x;
+    overflow: visible;
+  }
+
+  .manual-param-label {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 0.72rem !important;
+    white-space: nowrap !important;
+  }
+
+  .manual-param-slider {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100% !important;
+    height: 3px !important;
+    touch-action: pan-x !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    cursor: pointer;
+  }
+
+  .manual-param-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+  }
+
+  .manual-param-slider::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+  }
+
+  .manual-param-value {
+    grid-column: 3;
+    grid-row: 1;
+    font-size: 0.72rem !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+  }
+
+  .manual-params-card {
+    padding: 14px 12px !important;
+    overflow: visible !important;
+  }
+}
+
+/* 480px 以下：調色滑桿延續 640px 設定（16px thumb、4rem 1fr 2.8rem） */
+@media (max-width: 480px) {
+  .manual-param-row {
+    grid-template-columns: 4rem 1fr 2.8rem !important;
+  }
+
+  .manual-param-slider::-webkit-slider-thumb {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .manual-param-slider::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .manual-param-slider.slider-channel-r::-webkit-slider-thumb,
+  .manual-param-slider.slider-channel-r::-moz-range-thumb,
+  .manual-param-slider.slider-channel-g::-webkit-slider-thumb,
+  .manual-param-slider.slider-channel-g::-moz-range-thumb,
+  .manual-param-slider.slider-channel-b::-webkit-slider-thumb,
+  .manual-param-slider.slider-channel-b::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+/* 日落查詢：日期 + 城市（全站後援，與功能頁 flex 規則一致） */
+.sunset-query-fields {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 16px;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .sunset-query-fields {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .sunset-query-fields > label {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.sunset-query-fields > label {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.sunset-query-fields input[type="date"],
+.sunset-query-fields select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 【8】小字可讀下限（min-font-size 非標準，改用 max/clamp） */
+.comparison-title,
+.comparison-item-card .comparison-title,
+.bias-dashboard-title,
+.analysis-mode-title,
+.lightroom-adjustment-name,
+.adjustment-preview-title,
+.compare-histogram-title,
+.mode-label,
+.nd-eyebrow,
+.golden-eyebrow,
+.nd-scene-eyebrow {
+  font-size: max(10px, 0.5rem);
+}
+
+.bar-label,
+.bias-dashboard-cell-left,
+.photo-info span,
+.adjustment-preview-label,
+.compare-histogram-legend .legend-item {
+  font-size: max(12px, 0.72rem) !important;
+}
+
+/* ── 對比分析：兩欄上傳區 VS 裝飾 ── */
+.compare-mode .grid.grid-cols-1.md\:grid-cols-2 {
+  position: relative;
+  gap: 0 !important;
+  border: 1px solid #1a1a1a;
+}
+
+.compare-mode .grid.grid-cols-1.md\:grid-cols-2 > * {
+  border: none !important;
+  border-right: 1px solid #1a1a1a !important;
+}
+
+.compare-mode .grid.grid-cols-1.md\:grid-cols-2 > *:last-child {
+  border-right: none !important;
+}
+
+/* VS 中線裝飾 */
+.compare-mode .grid.grid-cols-1.md\:grid-cols-2::before {
+  content: "VS";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.5rem;
+  letter-spacing: 0.4em;
+  color: #fff;
+  background: #1a1a1a;
+  padding: 6px 10px;
+  z-index: 10;
+  line-height: 1;
+}
+
+/* 上傳卡片內：YOUR PHOTO / REFERENCE 角標 */
+.photo-upload-zone {
+  position: relative;
+}
+
+.photo-upload-zone::before {
+  content: "YOUR PHOTO";
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.38rem;
+  letter-spacing: 0.35em;
+  background: #1a1a1a;
+  color: #f5f2ee;
+  padding: 3px 10px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.reference-upload-zone {
+  position: relative;
+}
+
+.reference-upload-zone::before {
+  content: "REFERENCE";
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.38rem;
+  letter-spacing: 0.35em;
+  background: #1a1a1a;
+  color: #f5f2ee;
+  padding: 3px 10px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 開始分析按鈕區塊：加上分隔線 */
+.compare-mode .flex.justify-center {
+  margin-top: 0 !important;
+  border-top: 1px solid #1a1a1a;
+  padding-top: 0 !important;
+}
+
+.compare-mode .flex.justify-center button {
+  width: 100%;
+  padding: 20px;
+  background: #1a1a1a !important;
+  color: #f5f2ee !important;
+  border-radius: 0 !important;
+  border: none !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.35em !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  transition: background 0.15s !important;
+}
+
+.compare-mode .flex.justify-center button:hover {
+  background: #333 !important;
+}
+
+/* 分析中按鈕 */
+.compare-mode .flex.justify-center button[disabled] {
+  background: #e8e4de !important;
+  color: #999 !important;
+  cursor: not-allowed !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   對比／調色分析：字級、對齊與裝飾（覆寫上方規則）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* 【對比分析】上傳區對齊 */
+.photo-upload-zone .relative > button,
+.reference-upload-zone .relative > button {
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 20 !important;
+}
+
+/* 【對比分析】照片對比分析文字放大 */
+.comparison-item-card .comparison-title,
+.comparison-title {
+  font-size: max(12px, 0.7rem) !important;
+  letter-spacing: 0.25em !important;
+  color: #888 !important;
+  margin-bottom: 12px !important;
+}
+
+.comparison-item-card .bar-label {
+  font-size: max(12px, 0.75rem) !important;
+  color: #aaa !important;
+  width: 64px !important;
+  letter-spacing: 0.04em !important;
+}
+
+.comparison-item-card .comparison-result {
+  font-size: 0.88rem !important;
+  line-height: 1.7 !important;
+  color: #1a1a1a !important;
+}
+
+.comparison-item-card .comparison-bars {
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+}
+
+.comparison-item-card {
+  min-height: 120px !important;
+}
+
+/* 【對比分析】偏向分析 */
+.bias-dashboard-title {
+  font-size: max(12px, 0.68rem) !important;
+  letter-spacing: 0.3em !important;
+}
+
+.bias-dashboard-cell-left {
+  font-size: max(12px, 0.82rem) !important;
+  color: #555 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.bias-dashboard-cell-right,
+.bias-diff-text {
+  font-size: max(12px, 0.78rem) !important;
+  color: #888 !important;
+  letter-spacing: 0.03em !important;
+  text-align: right !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
+}
+
+.bias-label {
+  font-size: 0.82rem !important;
+  padding: 5px 14px !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* 【對比分析】Lightroom 區：標題視覺降級 + 通用 eyebrow */
+.lightroom-suggestions-title {
+  font-size: max(10px, 0.52rem) !important;
+  letter-spacing: 0.35em !important;
+  color: #888 !important;
+  visibility: hidden !important;
+  position: relative !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.lightroom-suggestions-card::before {
+  content: "調整建議參數";
+  display: block;
+  font-size: max(10px, 0.52rem);
+  letter-spacing: 0.35em;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+
+.lightroom-hint-box {
+  background: transparent !important;
+  border-left: 3px solid #c8c4be !important;
+  border-radius: 0 !important;
+  padding: 12px 16px !important;
+  margin-bottom: 20px !important;
+}
+
+.lightroom-hint-box p,
+.lightroom-hint-box > * {
+  font-size: 0.82rem !important;
+  color: #555 !important;
+  line-height: 1.7 !important;
+}
+
+/* 【調色分析】上傳標題 */
+.upload-single-photo h3 {
+  font-size: max(13px, 0.85rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #1a1a1a !important;
+  margin-bottom: 6px !important;
+  padding-left: 0 !important;
+}
+
+.upload-description {
+  font-size: 0.82rem !important;
+  color: #888 !important;
+  margin-bottom: 16px !important;
+  padding-left: 0 !important;
+}
+
+/* 【調色分析】調色參數分析 */
+.result-title {
+  font-size: max(13px, 0.88rem) !important;
+  letter-spacing: 0.25em !important;
+  color: #1a1a1a !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+}
+
+.basic-params h4,
+.tone-params h4 {
+  font-size: max(12px, 0.72rem) !important;
+  letter-spacing: 0.25em !important;
+  color: #888 !important;
+  margin-bottom: 16px !important;
+}
+
+.param-label {
+  font-size: max(11px, 0.62rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #888 !important;
+}
+
+.param-value {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem) !important;
+  font-weight: 200 !important;
+  color: #1a1a1a !important;
+}
+
+.tone-params .param-item:nth-child(2)::after {
+  content: "" !important;
+  display: none !important;
+}
+
+.tone-params .param-item:nth-child(3)::after {
+  content: "" !important;
+  display: none !important;
+}
+
+/* 【調色分析】色彩特徵 */
+.color-signature .color-tags {
+  display: none !important;
+}
+
+.color-signature-inner {
+  display: none !important;
+}
+
+.style-axis {
+  display: none !important;
+}
+
+.color-signature {
+  margin-top: 20px !important;
+  padding-top: 20px !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.color-signature h4 {
+  margin-bottom: 12px !important;
+  font-size: max(13px, 0.85rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #888 !important;
+}
+
+.color-sig-layout {
+  display: none !important;
+}
+
+.color-sig-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid #e8e4de;
+  margin-top: 16px;
+}
+
+.color-sig-stat {
+  padding: 20px 20px;
+  border-right: 1px solid #e8e4de;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.color-sig-stat:last-child {
+  border-right: none;
+}
+
+.color-sig-stat-value {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 200;
+  color: #1a1a1a;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.color-sig-stat-label {
+  font-size: 0.44rem;
+  letter-spacing: 0.25em;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+.color-temp-full {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.color-temp-bar {
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #7ab4d4, #f5f2ee 50%, #d4884a);
+  position: relative;
+}
+
+.color-temp-marker {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 12px;
+  background: #1a1a1a;
+  transform: translateX(-50%);
+}
+
+.color-temp-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.44rem;
+  letter-spacing: 0.12em;
+  color: #bbb;
+}
+
+.color-signature::after {
+  content: "以上為從照片中提取的視覺風格特徵";
+  margin-top: 16px !important;
+  display: block !important;
+  font-size: max(12px, 0.68rem) !important;
+  color: #888 !important;
+  border-left: 2px solid #999 !important;
+  padding-left: 12px !important;
+}
+
+.color-tag {
+  font-size: 0.9rem !important;
+  padding: 10px 24px !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* 【調色分析】偏向分析（與對比分析風格一致） */
+.bias-analysis-block .bias-dashboard-cell-left {
+  font-size: max(12px, 0.82rem) !important;
+  color: #555 !important;
+}
+
+.bias-analysis-block .bias-dashboard-cell-right,
+.bias-analysis-block .bias-diff-text {
+  font-size: max(12px, 0.78rem) !important;
+  color: #888 !important;
+  text-align: right !important;
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.bias-style-desc {
+  font-size: 0.88rem !important;
+  line-height: 1.8 !important;
+  color: #555 !important;
+}
+
+.bias-key-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid #e8e4de;
+  margin-top: 20px;
+}
+
+.bias-key-stat-item {
+  padding: 20px 16px;
+  border-right: 1px solid #e8e4de;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bias-key-stat-item:last-child {
+  border-right: none;
+}
+
+.bias-key-stat-value {
+  font-size: 2rem;
+  font-weight: 200;
+  color: #1a1a1a;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.bias-key-stat-label {
+  font-size: 0.44rem;
+  letter-spacing: 0.25em;
+  color: #bbb;
+  text-transform: uppercase;
+}
+
+/* 【調色分析】顏色分佈、手動調整、預覽 */
+.color-distribution h4 {
+  font-size: max(12px, 0.72rem) !important;
+  letter-spacing: 0.25em !important;
+  color: #888 !important;
+}
+
+.legend-item {
+  font-size: max(11px, 0.72rem) !important;
+  color: #888 !important;
+}
+
+.manual-params-card-title {
+  font-size: max(12px, 0.72rem) !important;
+  letter-spacing: 0.25em !important;
+  color: #888 !important;
+}
+
+.manual-params-card-desc {
+  font-size: 0.82rem !important;
+  color: #888 !important;
+  line-height: 1.6 !important;
+}
+
+.manual-param-label {
+  font-size: 0.82rem !important;
+  color: #555 !important;
+  letter-spacing: 0.04em !important;
+}
+
+.manual-param-value {
+  font-size: 0.82rem !important;
+  color: #1a1a1a !important;
+}
+
+.manual-params-preview-label {
+  font-size: max(11px, 0.65rem) !important;
+  letter-spacing: 0.15em !important;
+  color: #888 !important;
+  padding: 10px 0 10px !important;
+}
+
+.manual-params-apply-btn {
+  font-size: max(11px, 0.72rem) !important;
+  letter-spacing: 0.25em !important;
+}
+
+.manual-params-reset-btn {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em !important;
+}
+
+/* 風格識別：主標字放大 */
+.style-name {
+  font-size: clamp(3rem, 6vw, 5rem) !important;
+  font-weight: 200 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.05 !important;
+}
+
+/* 偏向分析：中性狀態改稜角邊框 */
+.bias-label[data-value="正常"],
+.bias-label[data-value="中性"],
+.bias-label[data-value="均衡"] {
+  background: transparent !important;
+  color: #1a1a1a !important;
+  border: 1px solid #1a1a1a !important;
+  font-size: 0.82rem !important;
+  padding: 5px 14px !important;
+  letter-spacing: 0.08em !important;
+}
+
+.color-signature {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.color-signature::after {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.bias-analysis-block {
+  margin-top: 24px !important;
+}
+
+.color-signature::after {
+  display: block !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.color-signature {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.bias-analysis-block {
+  margin-top: 20px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid #e8e4de !important;
+}
+
+.color-signature {
+  padding-top: 16px !important;
+  padding-bottom: 0 !important;
+  margin-top: 16px !important;
+  margin-bottom: 0 !important;
+}
+
+.color-signature::after {
+  display: block !important;
+  margin-top: 12px !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.bias-analysis-block {
+  margin-top: 16px !important;
+  padding-top: 16px !important;
+}
+
+.color-signature {
+  padding: 16px 0 0 0 !important;
+  margin: 16px 0 0 0 !important;
+}
+
+.color-signature::after {
+  display: block !important;
+  content: "以上為從照片中提取的視覺風格特徵" !important;
+  margin: 12px 0 0 0 !important;
+  padding: 0 0 0 12px !important;
+  border-left: 2px solid #999 !important;
+  font-size: 0.68rem !important;
+  color: #888 !important;
+  line-height: 1.5 !important;
+}
+
+.bias-analysis-block {
+  margin: 16px 0 0 0 !important;
+  padding: 16px 0 0 0 !important;
+  border-top: 1px solid #e8e4de !important;
+}
+
+.style-detection {
+  display: block !important;
+}
+
+.style-detection h4:first-child {
+  margin-bottom: 20px;
+}
+
+.bias-analysis-block {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.bias-analysis-block .bias-dashboard {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.bias-dashboard-title {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.bias-analysis-block {
+  margin-top: 32px !important;
+  padding-top: 32px !important;
+  border-top: 1px solid #e8e4de !important;
+}
+
+.bias-dashboard-title {
+  font-size: max(13px, 0.85rem) !important;
+  letter-spacing: 0.2em !important;
+  color: #888 !important;
+}
+
+.analysis-comparison-title {
+  font-size: max(14px, 0.95rem) !important;
+  letter-spacing: 0.25em !important;
+  color: #1a1a1a !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+  margin-bottom: 32px !important;
+  padding: 0 !important;
+}
+
+.photo-upload-zone .relative > button,
+.reference-upload-zone .relative > button {
+  top: 0 !important;
+  right: 0 !important;
+  z-index: 20 !important;
+}
+
+.comparison-item-card .comparison-result {
+  align-items: flex-start !important;
+  align-self: start !important;
+  padding-top: 24px !important;
+}
+
+.comparison-item-card {
+  min-height: 80px !important;
+}
+
+.comparison-item-card {
+  grid-template-rows: auto !important;
+  min-height: 0 !important;
+  align-items: stretch !important;
+}
+
+.comparison-item-card .comparison-result {
+  align-items: stretch !important;
+  align-self: stretch !important;
+  padding: 24px 0 24px 32px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.comparison-item-card .comparison-bars {
+  padding: 24px 40px 24px 0 !important;
+  justify-content: center !important;
+}
+
+/* --------------------------------------------------------------------------
+   分析模式區塊（拍攝後）：小螢幕單欄
+   -------------------------------------------------------------------------- */
+.analysis-mode-section__grid {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .analysis-mode-section__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .analysis-mode-section__col--main {
+    padding: 20px 0 24px 0 !important;
+    border-right: none !important;
+    border-bottom: 1px solid #e8e4de !important;
+  }
+
+  .analysis-mode-section__col--aside > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* 偏見分析列：窄螢幕改單欄 */
+.bias-comparison-row {
+  display: grid;
+  grid-template-columns: minmax(64px, 80px) minmax(0, 1fr) minmax(96px, 120px);
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #f0ece6;
+  gap: 8px;
+}
+
+@media (max-width: 768px) {
+  .bias-comparison-row {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .bias-comparison-row__scale {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+    min-height: 44px;
+  }
+}

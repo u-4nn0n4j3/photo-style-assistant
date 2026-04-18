@@ -712,6 +712,8 @@
   border-radius: 0 !important;
 }
 
+/* 手機兩欄參數格：見檔案底部 @media (max-width:767.98px) 與 .lightroom-* 覆寫 */
+
 .lightroom-hint-box {
   display: flex;
   align-items: flex-start;
@@ -772,6 +774,69 @@
   background: #1a1a1a;
 }
 
+/* 手機／窄螢幕：單欄堆疊 + 圖片區改淺底（避免 #1a1a1a 與 object-fit:contain 形成大片「黑塊」） */
+@media (max-width: 767.98px) {
+  .adjustment-preview-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+  }
+
+  .adjustment-preview-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 1px solid #e8e4de;
+    box-sizing: border-box;
+  }
+
+  .adjustment-preview-img-wrap {
+    aspect-ratio: 4 / 3;
+    min-height: 0 !important;
+    max-height: min(52vh, 360px) !important;
+    width: 100% !important;
+    overflow: hidden;
+    background: #f5f2ee !important;
+    border: none !important;
+    border-bottom: 1px solid #e8e4de !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .adjustment-preview-img {
+    width: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: min(52vh, 360px) !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+
+  .adjustment-preview-placeholder {
+    width: 100% !important;
+    min-height: 140px !important;
+    height: auto !important;
+    background: #e8e4de !important;
+  }
+}
+
+/* 桌面／平板雙欄：維持原編輯感（深色底 + 填滿裁切） */
+@media (min-width: 768px) {
+  .adjustment-preview-img-wrap {
+    background: #1a1a1a;
+  }
+
+  .adjustment-preview-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
 .adjustment-preview-item {
   background: #f5f2ee;
   display: flex;
@@ -782,14 +847,14 @@
   width: 100%;
   aspect-ratio: unset;
   overflow: hidden;
-  background: #1a1a1a;
+  background: #f5f2ee;
   border-radius: 0 !important;
 }
 
 .adjustment-preview-img {
   width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   border-radius: 0 !important;
   image-rendering: auto;
@@ -1038,6 +1103,36 @@
   color: #1a1a1a !important;
   letter-spacing: -0.02em !important;
   line-height: 1 !important;
+}
+
+/* 手機／窄螢幕：縮小「調色參數」巨型數字、減少垂直佔位（仍保留層次） */
+@media (max-width: 768px) {
+  .param-value {
+    font-size: 1.35rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.25 !important;
+  }
+
+  .param-item {
+    padding: 14px 16px !important;
+    gap: 6px !important;
+  }
+
+  .basic-params h4,
+  .tone-params h4,
+  .color-distribution h4 {
+    margin-bottom: 12px !important;
+  }
+
+  .result-title {
+    margin: 28px 0 20px !important;
+  }
+
+  .reverse-analysis-results,
+  .color-analysis-results {
+    max-width: 100%;
+  }
 }
 
 .param-bar {
@@ -1793,25 +1888,23 @@
   }
 }
 
-/* 手機版調色參數分析兩欄 */
+/* 手機版調色參數：改單欄，避免三欄過窄被裁切 */
 @media (max-width: 640px) {
   .param-grid {
     display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-columns: 1fr !important;
     gap: 0 !important;
   }
 
   .param-item {
-    padding: 10px 12px !important;
+    padding: 12px 14px !important;
     border-radius: 0 !important;
     min-height: unset !important;
-  }
-
-  .param-item:nth-child(3n) {
     border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
   }
 
-  .param-item:nth-last-child(-n+3) {
+  .param-item:last-child {
     border-bottom: none !important;
   }
 
@@ -1826,7 +1919,11 @@
   }
 
   .tone-params .param-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .tone-params .param-item {
+    border-right: none !important;
   }
 }
 
@@ -2240,6 +2337,26 @@
   font-size: clamp(1.6rem, 3.5vw, 2.2rem) !important;
   font-weight: 200 !important;
   color: #1a1a1a !important;
+}
+
+@media (max-width: 768px) {
+  .basic-params .param-value,
+  .tone-params .param-value,
+  .param-grid .param-value {
+    font-size: 1.3rem !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+  }
+
+  .lightroom-adjustment-value {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .comparison-item-card .bar-item:first-child > span:nth-child(3),
+  .comparison-item-card .bar-item:last-child > span:nth-child(3) {
+    font-size: 1.75rem !important;
+  }
 }
 
 .tone-params .param-item:nth-child(2)::after {
@@ -2700,5 +2817,206 @@
     margin-right: 0 !important;
     width: 100%;
     min-height: 44px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   對比分析：窄螢幕單欄（避免 1fr+240px 擠爆、分析模式三欄過窄）
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .comparison-item-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .comparison-item-card .comparison-title {
+    grid-column: 1 !important;
+  }
+
+  .comparison-item-card .comparison-bars {
+    grid-column: 1 !important;
+    border-right: none !important;
+    padding: 20px 0 !important;
+  }
+
+  .comparison-item-card .comparison-result {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    padding: 16px 0 24px !important;
+    border-top: 1px solid #e8e4de;
+  }
+
+  .mode-content-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .mode-data-item {
+    border-right: none !important;
+    border-bottom: 1px solid #e8e4de;
+  }
+
+  .mode-data-item:last-child {
+    border-bottom: none;
+  }
+
+  /* Lightroom 網格改在 max-width:767.98px 區塊（兩欄），避免與單欄規則衝突 */
+
+  .compare-mode .grid.grid-cols-1.md\:grid-cols-2::before {
+    display: none;
+  }
+
+  .compare-mode .grid.grid-cols-1.md\:grid-cols-2 > *:first-child {
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+  }
+
+  .analysis-mode-selector.mode-card-grid {
+    grid-template-columns: 1fr;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .analysis-mode-selector .mode-btn.mode-card {
+    border-right: none;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .analysis-mode-selector .mode-btn.mode-card:last-child {
+    border-bottom: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   手機版 < 768px：錯落／絕對定位還原為標準流（md: 以上不變）
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .golden-tl-en {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: auto !important;
+    text-align: left !important;
+    margin: 4px 0 0 !important;
+  }
+
+  .golden-tl-label-stack {
+    min-height: 0 !important;
+    width: 100% !important;
+  }
+
+  .golden-tl-mid-spacer {
+    display: none !important;
+  }
+
+  .golden-tl-row {
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    padding-top: 0.875rem !important;
+    padding-bottom: 0.875rem !important;
+  }
+
+  .golden-tl-time {
+    width: 100% !important;
+    text-align: left !important;
+    margin-top: 4px !important;
+  }
+
+  .style-detection {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  .style-name,
+  .style-desc {
+    grid-column: unset !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+  }
+
+  .style-desc {
+    border-top: 1px solid #e8e4de !important;
+    padding-top: 1rem !important;
+  }
+
+  .compare-mode .grid.grid-cols-1.md\:grid-cols-2::before {
+    display: none !important;
+  }
+
+  .compare-mode .grid.grid-cols-1.md\:grid-cols-2 {
+    position: static !important;
+  }
+
+  .photo-upload-zone::before,
+  .reference-upload-zone::before {
+    position: static !important;
+    display: inline-block !important;
+    margin-bottom: 8px !important;
+  }
+
+  .bias-key-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .bias-key-stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid #e8e4de !important;
+  }
+
+  .bias-key-stat-item:last-child {
+    border-bottom: none !important;
+  }
+
+  .color-sig-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .color-sig-stat {
+    border-right: none !important;
+    border-bottom: 1px solid #e8e4de !important;
+  }
+
+  .color-sig-stat:last-child {
+    border-bottom: none !important;
+  }
+
+  /* Lightroom 調整建議：窄螢幕兩欄網格（覆寫 max-width:768px 舊單欄） */
+  .lightroom-adjustment-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1px !important;
+    background: #1a1a1a !important;
+    border: 1px solid #1a1a1a !important;
+  }
+
+  .lightroom-adjustment-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    min-width: 0 !important;
+    padding: 10px 8px !important;
+    background: #f5f2ee !important;
+    border: none !important;
+  }
+
+  .lightroom-adjustment-item:nth-child(9) {
+    grid-column: 1 / -1 !important;
+  }
+
+  .lightroom-adjustment-name {
+    font-size: max(9px, 0.45rem) !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+  }
+
+  .lightroom-adjustment-value {
+    font-size: clamp(1rem, 3.8vw, 1.35rem) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
+    text-align: right !important;
+    line-height: 1.15 !important;
   }
 }

@@ -2332,11 +2332,7 @@ select option {
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .adjustment-preview-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* 調整預覽網格：手機版改在 analysis-mode.css（維持雙欄大圖） */
 
 .scenario-subtitle {
   font-size: 0.8rem;
@@ -2728,6 +2724,12 @@ strong,
     box-sizing: border-box !important;
   }
 
+  /* 功能頁：再收窄左右留白，內容區接近全寬 */
+  .app-container[data-psa-func="true"] {
+    padding-left: max(8px, env(safe-area-inset-left)) !important;
+    padding-right: max(8px, env(safe-area-inset-right)) !important;
+  }
+
   .main-content,
   .app-main {
     max-width: 100% !important;
@@ -2818,6 +2820,11 @@ strong,
 
   .tool-tab {
     flex: 0 0 100%;
+  }
+
+  /* 拍攝計算器工具列已改 grid，排除全寬 flex 規則 */
+  .app-container[data-psa-func="true"] .tool-tabs .tool-tab {
+    flex: unset !important;
   }
 
   .tolerance-section-title {
@@ -3584,6 +3591,86 @@ textarea:focus-visible {
 /* 偏好勾選：隔列微冷灰，避免整片同色 */
 .preference-checkboxes .preference-item:nth-child(4n + 2) {
   background: var(--psa-surface-cool);
+}
+
+/* ── 手機版 < 768px：邊距、直向堆疊、表單高度（md: 以上不變） ── */
+@media (max-width: 767.98px) {
+  .app-container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .main-content,
+  .app-main {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .site-header {
+    padding: 1.5rem max(1rem, env(safe-area-inset-left)) 1.25rem max(1rem, env(safe-area-inset-right));
+  }
+
+  .calculator-card,
+  .card:not(.analysis-comparison-card),
+  .result-card,
+  .info-card,
+  .upload-card {
+    padding-top: 1.35rem;
+    padding-bottom: 1.35rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .result-section {
+    padding-top: 1.75rem;
+    padding-bottom: 1.5rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  select,
+  textarea {
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .logo-section {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .tool-tabs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tool-tab {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .lightroom-adjustment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 1px !important;
+  }
+
+  .adjustment-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .scenario-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .scenario-btn {
+    width: 100% !important;
+    flex: none !important;
+  }
 }
 
 /* ── 減少動效偏好 ── */

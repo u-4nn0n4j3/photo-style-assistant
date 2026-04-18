@@ -202,6 +202,29 @@ body:has(.app-container[data-psa-func="true"])::before {
   display: none;
 }
 
+/* 頂部「拍攝計算器 / 拍攝後分析」：窄螢幕隱藏底圖裝飾、避免半圖半字 */
+@media (max-width: 768px) {
+  .app-container[data-psa-func="true"] .nav-tab-headline {
+    flex-wrap: wrap !important;
+    row-gap: 6px !important;
+    column-gap: 10px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-container[data-psa-func="true"] .nav-tab-meter {
+    display: none !important;
+  }
+
+  .app-container[data-psa-func="true"] .nav-tab {
+    flex-direction: row !important;
+    align-items: center !important;
+    min-height: 64px !important;
+    padding: 12px 16px !important;
+    gap: 8px !important;
+  }
+}
+
 /* --------------------------------------------------------------------------
    style: 拍攝計算器 - 左側縱列 tool-tabs（140px）+ 右側內容
    -------------------------------------------------------------------------- */
@@ -936,7 +959,7 @@ body:has(.app-container[data-psa-func="true"])::before {
   min-width: 44px;
 }
 
-/* 1) 拍攝計算器：窄螢幕改為上橫列 + 下內容 */
+/* 1) 拍攝計算器：窄螢幕改為「2 欄網格」五工具全可見（不依賴橫向捲動） */
 @media (max-width: 768px) {
   .app-container[data-psa-func="true"] .psa-calc-shell {
     flex-direction: column;
@@ -946,47 +969,59 @@ body:has(.app-container[data-psa-func="true"])::before {
     flex: none;
     width: 100%;
     max-width: none;
+    min-width: 0;
     border-left: none;
     border-top: 1px solid #c8c4be;
     border-bottom: 1px solid #111;
+    position: relative;
+    z-index: 2;
   }
 
   .app-container[data-psa-func="true"] .tool-tabs {
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    max-width: none !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0 !important;
     width: 100% !important;
-    padding-bottom: 0.25rem;
-    -webkit-overflow-scrolling: touch;
+    max-width: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
+    background: rgba(0, 0, 0, 0.04);
   }
 
   .app-container[data-psa-func="true"] .tool-tab {
-    flex: 0 0 auto !important;
-    min-width: 112px !important;
-    border-left: 3px solid transparent !important;
-    border-bottom: none !important;
-    border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
+    padding: 10px 12px !important;
+    border-left: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+    box-sizing: border-box !important;
   }
 
-  .app-container[data-psa-func="true"] .tool-tab:last-child {
+  .app-container[data-psa-func="true"] .tool-tab:nth-child(odd) {
+    border-left: 3px solid transparent !important;
+  }
+
+  .app-container[data-psa-func="true"] .tool-tab:nth-child(5) {
+    grid-column: 1 / -1;
+    border-right: none !important;
+  }
+
+  .app-container[data-psa-func="true"] .tool-tab:nth-child(2n) {
     border-right: none !important;
   }
 
   .app-container[data-psa-func="true"] .tool-tab.active {
     border-left-color: #1a1a1a !important;
+    background: rgba(255, 255, 255, 0.65) !important;
   }
 
   .app-container[data-psa-func="true"] .psa-calc-content {
     border-left: none;
-  }
-}
-
-@media (max-width: 430px) {
-  .app-container[data-psa-func="true"] .tool-tab {
-    min-width: 104px !important;
-    padding-inline: 10px !important;
   }
 }
 
@@ -1805,6 +1840,229 @@ body:has(.app-container[data-psa-func="true"])::before {
   .app-container[data-psa-func="true"] .nav-tab {
     padding-left: max(24px, env(safe-area-inset-left));
     padding-right: max(24px, env(safe-area-inset-right));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   曝光三角 · 平板（768–1024）：與手機同套的「配方卡」直向堆疊
+   必須寫在 max-width:1024px 之後，否則會被該區塊內舊規則蓋掉
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .exposure-combos {
+    counter-reset: exposure-recipe;
+    gap: 14px !important;
+    background: transparent !important;
+  }
+
+  .exposure-combo-col {
+    counter-increment: exposure-recipe;
+    position: relative;
+    overflow: hidden;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    column-gap: 0 !important;
+    row-gap: 2px !important;
+    align-items: stretch !important;
+    padding: 16px 12px 14px 16px !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    box-sizing: border-box !important;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.55) 0%, rgba(248, 245, 240, 0.98) 42%, rgba(228, 224, 216, 0.35) 100%),
+      radial-gradient(120% 80% at 100% 0%, rgba(122, 138, 156, 0.09) 0%, transparent 55%) !important;
+    border: 1px solid rgba(26, 26, 26, 0.11) !important;
+    border-left: 3px solid #1a1a1a !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.75) inset,
+      0 10px 28px rgba(42, 48, 58, 0.07) !important;
+  }
+
+  .exposure-combo-col::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(122, 138, 156, 0.5) 28%,
+      rgba(26, 26, 26, 0.35) 50%,
+      rgba(122, 138, 156, 0.45) 72%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  .exposure-combo-col::after {
+    content: counter(exposure-recipe, decimal-leading-zero);
+    position: absolute;
+    right: 4px;
+    bottom: 2px;
+    font-size: clamp(1.75rem, 2.8vw, 2.65rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: rgba(26, 26, 26, 0.06);
+    pointer-events: none;
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .exposure-combo-col > .exposure-combo-num {
+    position: relative;
+    z-index: 1;
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    margin: 0 0 10px !important;
+    padding: 0 0 10px 2px !important;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1) !important;
+    font-size: 0.62rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.38em !important;
+    color: #1a1a1a !important;
+    opacity: 0.92 !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-sub:nth-child(2) {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    text-align: center !important;
+    padding: 4px 4px 2px !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-sub:nth-child(4) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    text-align: center !important;
+    padding: 4px 4px 2px !important;
+    border-left: 1px solid rgba(26, 26, 26, 0.1) !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-val:nth-child(3) {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    text-align: center !important;
+    padding: 2px 4px 8px !important;
+    border-right: 1px solid rgba(26, 26, 26, 0.1) !important;
+    font-size: 0.98rem !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-val:nth-child(5) {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    text-align: center !important;
+    padding: 2px 4px 8px !important;
+    font-size: 0.98rem !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-sub:nth-child(6) {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+    text-align: center !important;
+    margin-top: 2px !important;
+    padding: 8px 4px 3px !important;
+    border-top: 1px dashed rgba(26, 26, 26, 0.14) !important;
+    background: rgba(26, 26, 26, 0.035) !important;
+    font-size: 0.52rem !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
+    color: #5a6570 !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-val:nth-child(7) {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+    text-align: center !important;
+    padding: 2px 4px 6px !important;
+    margin-top: -4px !important;
+    background: rgba(26, 26, 26, 0.035) !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.1em !important;
+    color: #111 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+
+  .exposure-combo-sub {
+    font-size: 0.52rem !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: #7a8a9c !important;
+  }
+
+  .exposure-combo-val {
+    font-weight: 500 !important;
+    color: #141414 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   曝光三角 · 寬螢幕（≥1025）：回到原版三欄直排，只做極少量編輯感加強（不花俏）
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  .exposure-calculator-editorial .exposure-combos {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    border: 1px solid #c8c4be;
+    border-left: 3px solid #1a1a1a;
+    background: #f5f2ee;
+    box-shadow: var(--psa-shadow-sm, 0 4px 12px rgba(0, 0, 0, 0.06));
+  }
+
+  .exposure-calculator-editorial .exposure-combos::before {
+    content: none !important;
+    display: none !important;
+  }
+
+  .exposure-calculator-editorial .exposure-combo-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 22px 26px !important;
+    border-right: 1px solid #c8c4be !important;
+    border-bottom: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .exposure-calculator-editorial .exposure-combo-col:last-child {
+    border-right: none !important;
+  }
+
+  .exposure-calculator-editorial .exposure-combo-col::before,
+  .exposure-calculator-editorial .exposure-combo-col::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* 小創意：01／02／03 下方一條細線，像章節標題（仍像原版結構） */
+  .exposure-calculator-editorial .exposure-combo-num {
+    padding-bottom: 10px !important;
+    margin-bottom: 4px !important;
+    border-bottom: 1px solid rgba(200, 196, 190, 0.9) !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.28em !important;
+    font-weight: 500 !important;
+    color: #888 !important;
+  }
+
+  .exposure-calculator-editorial .exposure-combo-sub {
+    font-size: 0.65rem !important;
+    letter-spacing: 0.16em !important;
+    color: #888 !important;
+  }
+
+  .exposure-calculator-editorial .exposure-combo-val {
+    font-size: clamp(1.32rem, 1.35vw, 1.48rem) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.04em !important;
+    color: #1a1a1a !important;
+    font-variant-numeric: tabular-nums !important;
   }
 }
 
@@ -2834,6 +3092,128 @@ body:has(.app-container[data-psa-func="true"])::before {
   margin-bottom: 4px;
 }
 
+/* 曝光三角：焦距 + 相機類型列（手機全寬、類型三鈕等分） */
+.exposure-focal-camera-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .exposure-focal-camera-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .exposure-focal-camera-row__label {
+    margin-left: 0 !important;
+  }
+
+  .exposure-camera-type-group {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+
+  .exposure-camera-type-group label {
+    justify-content: center;
+    text-align: center;
+    padding: 10px 8px !important;
+  }
+}
+
+/* 情境推薦：對數軸刻度（窄螢幕錯行避免重疊） */
+.scenario-log-tick-row {
+  position: relative;
+  min-height: 2.25rem;
+  padding-bottom: 2px;
+}
+
+@media (max-width: 640px) {
+  .scenario-log-tick-row__label {
+    font-size: 8px !important;
+    letter-spacing: -0.02em;
+  }
+
+  .scenario-log-tick-row__label:nth-child(even) {
+    top: 14px !important;
+  }
+
+  .scenario-log-tick-row__label:nth-child(odd):not(:first-child):not(:last-child) {
+    top: 0;
+  }
+}
+
+/* 推薦結果：三欄參數（手機緊湊、滿寬） */
+.recommendation-params-3col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid #c8c4be;
+  border-bottom: 1px solid #c8c4be;
+  margin: 16px 0;
+  width: 100%;
+}
+
+.recommendation-params-3col__cell {
+  padding: 12px 8px;
+  border-right: 1px solid #c8c4be;
+  background: transparent;
+  text-align: center;
+  min-width: 0;
+}
+
+.recommendation-params-3col__cell--last {
+  border-right: none;
+}
+
+@media (max-width: 640px) {
+  .recommendation-params-3col .setting-label {
+    font-size: 0.65rem !important;
+  }
+
+  .recommendation-params-3col .setting-value {
+    font-size: 0.95rem !important;
+    display: block;
+    margin-top: 4px;
+    line-height: 1.2;
+  }
+
+  .recommendation-params-3col__cell {
+    padding: 10px 6px;
+  }
+
+  .recommendation-card .card-reason {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+  }
+}
+
+/* 分析結果區：手機勿再收窄成細欄 */
+@media (max-width: 768px) {
+  .app-container[data-psa-func="true"] .analysis-result-wrapper,
+  .app-container[data-psa-func="true"] .reverse-analysis-results {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+  }
+
+  .app-container[data-psa-func="true"] .manual-params-preview-pair {
+    gap: 10px !important;
+  }
+
+  .app-container[data-psa-func="true"] .manual-params-preview-img {
+    min-height: 200px;
+    object-fit: contain !important;
+    width: 100% !important;
+  }
+}
+
 /* --------------------------------------------------------------------------
    鍵盤焦點（功能頁）
    -------------------------------------------------------------------------- */
@@ -2854,4 +3234,336 @@ body:has(.app-container[data-psa-func="true"])::before {
 .app-container[data-psa-func="true"] .psa-calc-content textarea:focus-visible {
   outline: 2px solid var(--fg-accent, #7a8a9c);
   outline-offset: 1px;
+}
+
+/* ==========================================================================
+   手機版 < 768px（對齊 Tailwind max-md；md: 768px 以上維持原樣）
+   單欄、標準流、輸入全寬 44px、結果區卡片堆疊
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  .app-container[data-psa-func="true"] .psa-calc-content {
+    padding: 1.25rem max(1rem, env(safe-area-inset-left)) 1.5rem max(1rem, env(safe-area-inset-right));
+  }
+
+  .app-container[data-psa-func="true"] .site-header {
+    padding: 1rem max(1rem, env(safe-area-inset-right)) 1rem max(1rem, env(safe-area-inset-left));
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  /* 五工具列：改單欄全寬（覆寫上方 768px 的 2 欄網格） */
+  .app-container[data-psa-func="true"] .tool-tabs {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+  }
+
+  .app-container[data-psa-func="true"] .tool-tab {
+    border-right: none !important;
+    width: 100% !important;
+    min-height: 48px !important;
+  }
+
+  .app-container[data-psa-func="true"] .tool-tab:nth-child(odd),
+  .app-container[data-psa-func="true"] .tool-tab:nth-child(2n),
+  .app-container[data-psa-func="true"] .tool-tab:nth-child(5) {
+    grid-column: unset !important;
+  }
+
+  /* 表單：觸控目標 + 全寬 */
+  .app-container[data-psa-func="true"] .psa-calc-content input[type="text"],
+  .app-container[data-psa-func="true"] .psa-calc-content input[type="number"],
+  .app-container[data-psa-func="true"] .psa-calc-content input[type="date"],
+  .app-container[data-psa-func="true"] .psa-calc-content select,
+  .app-container[data-psa-func="true"] .psa-calc-content textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 44px !important;
+    box-sizing: border-box !important;
+  }
+
+  .nd-selects-row,
+  .golden-inputs-row {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .nd-select-label,
+  .golden-input-group {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #1a1a1a !important;
+  }
+
+  .nd-select-label:last-child,
+  .golden-input-group:last-child {
+    border-bottom: none !important;
+  }
+
+  .nd-result-time-block {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
+  .nd-shutter-compare {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    grid-template-columns: unset !important;
+  }
+
+  .nd-shutter-before,
+  .nd-shutter-after {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #c8c4be !important;
+    padding-top: 0.875rem !important;
+    padding-bottom: 0.875rem !important;
+  }
+
+  .nd-shutter-arrow {
+    padding: 0.5rem 0 !important;
+    transform: rotate(90deg);
+  }
+
+  .nd-shutter-stops {
+    grid-column: unset !important;
+    width: 100% !important;
+    border-top: 1px solid #e8e4de !important;
+  }
+
+  .dof-result-trio {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+  }
+
+  .dof-trio-col {
+    width: 100% !important;
+    padding: 0.75rem 0 !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .dof-trio-col:last-child {
+    border-bottom: none !important;
+  }
+
+  /* 推薦結果三欄 → 卡片直向堆疊 */
+  .recommendation-params-3col {
+    grid-template-columns: 1fr !important;
+    border-left: 1px solid #c8c4be !important;
+    border-right: 1px solid #c8c4be !important;
+  }
+
+  .recommendation-params-3col__cell {
+    border-right: none !important;
+    border-bottom: 1px solid #c8c4be !important;
+    padding: 0.875rem 0.75rem !important;
+  }
+
+  .recommendation-params-3col__cell:last-child {
+    border-bottom: none !important;
+  }
+
+  .app-container[data-psa-func="true"] .card-settings {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+  }
+
+  .app-container[data-psa-func="true"] .setting-item {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #c8c4be !important;
+  }
+
+  .app-container[data-psa-func="true"] .setting-item:last-child {
+    border-bottom: none !important;
+  }
+
+  .nd-scene-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 曝光三角：三張卡直向堆疊；卡內「光圈｜快門」並排 + ISO 帶狀（減少中空、增加編排感） */
+  .exposure-combos {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: transparent !important;
+    padding: 6px 0 4px !important;
+    box-sizing: border-box !important;
+    counter-reset: exposure-recipe;
+  }
+
+  .exposure-combo-col {
+    counter-increment: exposure-recipe;
+    position: relative !important;
+    overflow: hidden !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto auto auto auto auto !important;
+    column-gap: 0 !important;
+    row-gap: 4px !important;
+    align-items: stretch !important;
+    padding: 18px 14px 16px 18px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.55) 0%, rgba(248, 245, 240, 0.98) 42%, rgba(228, 224, 216, 0.35) 100%),
+      radial-gradient(120% 80% at 100% 0%, rgba(122, 138, 156, 0.09) 0%, transparent 55%) !important;
+    border: 1px solid rgba(26, 26, 26, 0.11) !important;
+    border-left: 3px solid #1a1a1a !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.75) inset,
+      0 10px 28px rgba(42, 48, 58, 0.07) !important;
+  }
+
+  /* 頂緣光譜線 */
+  .exposure-combo-col::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(122, 138, 156, 0.5) 28%,
+      rgba(26, 26, 26, 0.35) 50%,
+      rgba(122, 138, 156, 0.45) 72%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* 右下角巨大淡序號（與左上角小標呼應） */
+  .exposure-combo-col::after {
+    content: counter(exposure-recipe, decimal-leading-zero);
+    position: absolute;
+    right: 6px;
+    bottom: 2px;
+    font-size: clamp(2.75rem, 14vw, 3.75rem);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: rgba(26, 26, 26, 0.06);
+    pointer-events: none;
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .exposure-combo-num {
+    position: relative !important;
+    z-index: 1 !important;
+    grid-column: 1 / -1 !important;
+    grid-row: 1 !important;
+    margin: 0 0 14px !important;
+    padding: 0 0 12px 2px !important;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1) !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.42em !important;
+    color: #1a1a1a !important;
+    opacity: 0.92 !important;
+  }
+
+  /* 小標：光圈 / 快門 同列 */
+  .exposure-combo-col > .exposure-combo-sub:nth-child(2) {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    text-align: center !important;
+    padding: 6px 8px 2px !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-sub:nth-child(4) {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    text-align: center !important;
+    padding: 6px 8px 2px !important;
+    border-left: 1px solid rgba(26, 26, 26, 0.1) !important;
+  }
+
+  /* 數值：與上列對齊，置中 */
+  .exposure-combo-col > .exposure-combo-val:nth-child(3) {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    text-align: center !important;
+    padding: 2px 8px 10px !important;
+    border-right: 1px solid rgba(26, 26, 26, 0.1) !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-val:nth-child(5) {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+    text-align: center !important;
+    padding: 2px 8px 10px !important;
+  }
+
+  /* ISO：全寬「感光度」帶 */
+  .exposure-combo-col > .exposure-combo-sub:nth-child(6) {
+    grid-column: 1 / -1 !important;
+    grid-row: 4 !important;
+    text-align: center !important;
+    margin-top: 4px !important;
+    padding: 10px 8px 4px !important;
+    border-top: 1px dashed rgba(26, 26, 26, 0.14) !important;
+    background: rgba(26, 26, 26, 0.035) !important;
+    font-size: 0.58rem !important;
+    letter-spacing: 0.28em !important;
+    text-transform: uppercase !important;
+    color: #5a6570 !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-val:nth-child(7) {
+    grid-column: 1 / -1 !important;
+    grid-row: 5 !important;
+    text-align: center !important;
+    padding: 4px 8px 8px !important;
+    margin-top: -4px !important;
+    background: rgba(26, 26, 26, 0.035) !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    color: #111 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+
+  .exposure-combo-sub {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
+    color: #7a8a9c !important;
+  }
+
+  .exposure-combo-val {
+    font-weight: 500 !important;
+    color: #141414 !important;
+    font-variant-numeric: tabular-nums !important;
+  }
+
+  .exposure-combo-col > .exposure-combo-val:nth-child(3),
+  .exposure-combo-col > .exposure-combo-val:nth-child(5) {
+    font-size: 1.08rem !important;
+  }
+
+  .exposure-ev-block {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .sunset-row:not(.sunset-row-golden):not(.sunset-row-blue-hour) {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.35rem !important;
+  }
 }

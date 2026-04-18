@@ -927,15 +927,7 @@ function ExposureCalculator() {
         </label>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          gap: "10px 16px",
-          fontSize: "0.8rem",
-        }}
-      >
+      <div className="exposure-focal-camera-row">
         <span className="text-[var(--color-dark-primary)] shrink-0">焦距（mm）</span>
         <div className="flex gap-2 items-center min-w-0">
           <select
@@ -969,8 +961,8 @@ function ExposureCalculator() {
         </div>
         {customErrors.focalLength && <span className="text-xs text-red-600 w-full">{customErrors.focalLength}</span>}
 
-        <span className="text-[var(--color-dark-primary)] shrink-0 ml-2">相機類型</span>
-        <div className="flex flex-wrap gap-2 items-center" role="radiogroup" aria-label="相機類型（曝光）">
+        <span className="text-[var(--color-dark-primary)] shrink-0 exposure-focal-camera-row__label">相機類型</span>
+        <div className="exposure-camera-type-group flex flex-wrap gap-2 items-center" role="radiogroup" aria-label="相機類型（曝光）">
           {EXPOSURE_CAMERA_TYPES.map((cam) => (
             <label
               key={cam.id}
@@ -2206,44 +2198,16 @@ function ScenarioRecommendationTool() {
                   <span className="card-badge">推薦 {index + 1}</span>
                   <span className="card-title">{rec.title}</span>
                 </div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr 1fr",
-                    borderTop: "1px solid #c8c4be",
-                    borderBottom: "1px solid #c8c4be",
-                    margin: "20px 0",
-                  }}
-                >
-                  <div
-                    style={{
-                      padding: "24px 16px",
-                      borderRight: "1px solid #c8c4be",
-                      background: "transparent",
-                      textAlign: "center",
-                    }}
-                  >
+                <div className="recommendation-params-3col">
+                  <div className="recommendation-params-3col__cell">
                     <span className="setting-label">光圈</span>
                     <span className="setting-value">f/{rec.aperture}</span>
                   </div>
-                  <div
-                    style={{
-                      padding: "24px 16px",
-                      borderRight: "1px solid #c8c4be",
-                      background: "transparent",
-                      textAlign: "center",
-                    }}
-                  >
+                  <div className="recommendation-params-3col__cell">
                     <span className="setting-label">快門</span>
                     <span className="setting-value">{rec.shutter}</span>
                   </div>
-                  <div
-                    style={{
-                      padding: "24px 16px",
-                      background: "transparent",
-                      textAlign: "center",
-                    }}
-                  >
+                  <div className="recommendation-params-3col__cell recommendation-params-3col__cell--last">
                     <span className="setting-label">ISO</span>
                     <span className="setting-value">{rec.iso}</span>
                   </div>
@@ -5409,7 +5373,7 @@ const SCENARIO_ISO_TICKS = [
 
 function ScenarioLogTickRow({ ticks, positionOf }) {
   return (
-    <div className="relative w-full h-3.5 mt-0.5">
+    <div className="scenario-log-tick-row relative w-full mt-0.5">
       {ticks.map((t, i, arr) => {
         const leftPct = positionOf(t.value) * 100;
         const transform =
@@ -5417,7 +5381,7 @@ function ScenarioLogTickRow({ ticks, positionOf }) {
         return (
           <span
             key={t.label}
-            className="absolute top-0 text-[9px] leading-none whitespace-nowrap text-[var(--color-text-tertiary)]"
+            className="scenario-log-tick-row__label absolute top-0 text-[9px] sm:text-[9px] leading-none whitespace-nowrap text-[var(--color-text-tertiary)]"
             style={{ left: `${leftPct}%`, transform }}
           >
             {t.label}
@@ -6525,13 +6489,14 @@ function App() {
                 boxSizing: "border-box",
               }}
             >
-              <span style={{ display: "flex", alignItems: "baseline", gap: "12px" }}>
+              <span className="nav-tab-headline" style={{ display: "flex", alignItems: "baseline", gap: "12px" }}>
                 <span style={{ fontSize: "0.6rem", letterSpacing: "0.15em", opacity: 0.4 }}>01</span>
                 <span style={{ fontSize: "1.1rem", fontWeight: 500, letterSpacing: "0.06em" }}>拍攝計算器</span>
                 <span style={{ fontSize: "0.65rem", letterSpacing: "0.1em", opacity: 0.4 }}>曝光 · 景深 · ND · 日落</span>
               </span>
 
               <span
+                className="nav-tab-meter"
                 aria-hidden
                 style={{ display: "flex", alignItems: "flex-end", gap: "0", width: "100%" }}
               >
@@ -6603,13 +6568,14 @@ function App() {
                 boxSizing: "border-box",
               }}
             >
-              <span style={{ display: "flex", alignItems: "baseline", gap: "12px" }}>
+              <span className="nav-tab-headline" style={{ display: "flex", alignItems: "baseline", gap: "12px" }}>
                 <span style={{ fontSize: "0.6rem", letterSpacing: "0.15em", opacity: 0.4 }}>02</span>
                 <span style={{ fontSize: "1.1rem", fontWeight: 500, letterSpacing: "0.06em" }}>拍攝後分析</span>
                 <span style={{ fontSize: "0.65rem", letterSpacing: "0.1em", opacity: 0.4 }}>風格分析 · 調色建議</span>
               </span>
 
               <span
+                className="nav-tab-meter"
                 aria-hidden
                 style={{ display: "flex", flexDirection: "column", gap: "4px", width: "100%" }}
               >

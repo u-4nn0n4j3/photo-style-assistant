@@ -3,6 +3,9 @@
   background: #F5F2EE;
   display: flex;
   align-items: stretch;
+  /* 內容可自然伸長捲動，避免矮視窗（含 DevTools）裁切底部 */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .homepage-psa__shell {
@@ -321,19 +324,37 @@
 .homepage-psa__hero-bg { display: none; }
 
 @media (max-width: 900px) {
+  /* 窄螢幕不強制整屏高，避免底部文案被「卡在視窗外」 */
+  .homepage-psa[data-psa-home="true"] {
+    min-height: unset;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
   .homepage-psa__hero {
     grid-template-columns: 1fr;
+    min-height: 0;
+    flex: 1 1 auto;
   }
   .homepage-psa__title-block {
     border-right: none;
     border-bottom: 1px solid #111;
-    min-height: 55vh;
+    min-height: unset;
+    padding-top: 40px;
+    padding-bottom: 36px;
+    gap: 1.25rem;
+    justify-content: flex-start;
   }
   .homepage-psa__title {
-    font-size: clamp(4rem, 13vw, 6rem);
+    font-size: clamp(3.25rem, 12vw, 5.5rem);
   }
   .homepage-psa__fstop-rail {
-    min-height: 180px;
+    min-height: min(200px, 28vh);
+  }
+  .homepage-psa__side {
+    justify-content: flex-start;
+    gap: 40px;
+    padding-top: 40px;
+    padding-bottom: 48px;
   }
 }
 
@@ -347,5 +368,55 @@
   }
   .homepage-psa__shell {
     border: none;
+  }
+}
+
+/* < 768px：與全站 max-md 一致，主視覺改單欄流、避免橫向擠壓 */
+@media (max-width: 767.98px) {
+  .homepage-psa__nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem max(1rem, env(safe-area-inset-left)) 1.25rem max(1rem, env(safe-area-inset-right));
+  }
+
+  .homepage-psa__nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .homepage-psa__title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  .homepage-psa__fstop-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 0;
+    height: auto;
+    border-left: none;
+    padding-left: 0;
+    gap: 0.5rem 1rem;
+    width: 100%;
+  }
+
+  .homepage-psa__title-block,
+  .homepage-psa__side {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .homepage-psa__ev-meter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .homepage-psa__ev-track {
+    width: 100%;
   }
 }
